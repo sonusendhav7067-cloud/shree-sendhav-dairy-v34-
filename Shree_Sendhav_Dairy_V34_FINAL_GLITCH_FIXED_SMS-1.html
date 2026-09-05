@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shree Sendhav Dairy V34</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef3f9;color:#172033}
+header{background:linear-gradient(135deg,#005da8,#0876c9);color:#fff;text-align:center;padding:18px 10px;box-shadow:0 3px 12px #0003}
+header h1{margin:0;font-size:28px}header div{margin-top:5px}
+main{max-width:1250px;margin:auto;padding:14px}
+nav{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}
+button{border:0;border-radius:9px;padding:12px;font-weight:bold;cursor:pointer}
+nav button,.blue{background:#0565ad;color:#fff}.green{background:#008d3d;color:#fff}.red{background:#c62828;color:#fff}.gray{background:#e6edf4;color:#172033}.orange{background:#e88a00;color:#fff}.purple{background:#6b43a5;color:#fff}
+section{background:#fff;border-radius:15px;padding:16px;margin-top:14px;box-shadow:0 3px 12px #0002}
+.hide{display:none}h2{color:#075b9d;margin-top:0}h3{color:#075b9d}
+.row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+label{display:block;font-weight:bold;margin:8px 0 5px}input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5df;border-radius:8px;font-size:15px}textarea{min-height:80px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.scroll{overflow:auto}
+table{border-collapse:collapse;width:100%;min-width:780px}th,td{padding:8px;border:1px solid #d8dee6;text-align:left}th{background:#075b9d;color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stats div{background:#e9f4ff;padding:14px;border-radius:10px}.stats b{display:block;font-size:23px;margin-top:5px}
+.cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{padding:15px;border-radius:12px;background:#f5f9fd;border:1px solid #dde6ef}
+.note{background:#fff7df;padding:12px;border-radius:9px;margin:10px 0}.success{background:#eaf8ee;padding:12px;border-radius:9px}.danger{background:#fff0f0;padding:12px;border-radius:9px}
+.balance{font-size:26px;font-weight:bold;color:#075b9d}.small{font-size:12px;color:#59636f}
+.kpi-red{background:#fff0f0!important}.kpi-green{background:#ecfaef!important}.kpi-purple{background:#f4edff!important}
+.bill{border:1px solid #222;padding:14px;background:#fff}.bill h1{text-align:center;margin:0}.bill .sub{text-align:center;font-weight:bold}
+.bill table{min-width:0;font-size:12px}.bill th{background:#222}.bill .total td{font-weight:bold;background:#f2f2f2}.bill .summary{margin-top:10px;border:1px solid #222;padding:10px}
+.tag{display:inline-block;padding:5px 8px;border-radius:20px;background:#e8f2ff;margin:2px}
+footer{text-align:center;padding:20px;color:#667}
+@media(max-width:700px){nav{grid-template-columns:repeat(2,1fr)}.row,.row3,.row4,.cardgrid,.stats{grid-template-columns:1fr}.stats div{min-height:70px}}
+@media print{@page{size:A4;margin:8mm}body{background:#fff}header,nav,#dash,#farmer,#milk,#purchase,#payment,#report,#products,#settings,#clr,#backup,.no-print{display:none!important}main{padding:0;margin:0;max-width:none}#bill{display:block!important;box-shadow:none;margin:0}.bill{border:0}}
+</style>
+</head>
+<body>
+<header><h1>🥛 Shree Sendhav Dairy V34</h1><div>Milk Purchase & Farmer Management System</div></header>
+<main>
+<nav>
+<button onclick="show('dash')">🏠 Dashboard</button>
+<button onclick="show('farmer')">👨‍🌾 Farmer Master</button>
+<button onclick="show('milk')">🥛 Milk Entry</button>
+<button onclick="show('purchase')">🧾 Farmer Purchase</button>
+<button onclick="show('payment')">💰 Payments / AD / Cut-off</button>
+<button onclick="show('bill')">📅 10-Day Bill</button>
+<button onclick="show('report')">📊 Reports</button>
+<button onclick="show('products')">📦 Products</button>
+<button onclick="show('clr')">🐄 Cow CLR Rate List</button>
+<button onclick="show('settings')">⚙️ Settings</button>
+<button onclick="show('backup')">💾 Backup / Restore</button>
+<button onclick="show('whatsapp')">📱 WhatsApp / SMS</button>
+</nav>
+
+<section id="dash"><h2>Dashboard</h2>
+<div class="stats">
+<div>Total Farmers<b id="df">0</b></div><div>Today's Milk<b id="dm">0.00 L</b></div>
+<div>Today's FAT KG<b id="dkg">0.000</b></div><div>Today's Purchase<b id="da">₹0.00</b></div>
+<div class="kpi-red">Today's Deductions<b id="dd">₹0.00</b></div>
+<div class="kpi-green">Net Today<b id="dn">₹0.00</b></div>
+<div>Morning Milk<b id="dmo">0.00 L</b></div><div>Evening Milk<b id="dev">0.00 L</b></div>
+</div>
+<div class="cardgrid">
+<div class="card"><h3>Quick Actions</h3><button class="blue" onclick="show('milk')">🥛 Milk Entry</button> <button class="blue" onclick="show('farmer')">👨‍🌾 Farmer</button></div>
+<div class="card"><h3>Today's Summary</h3><div id="dashSummary">No entries yet.</div></div>
+<div class="card"><h3>Data Safety</h3><div>Data is stored locally in this browser. Use Backup regularly.</div></div>
+</div>
+</section>
+
+<section id="farmer" class="hide"><h2>👨‍🌾 Farmer Master</h2>
+<div class="row">
+<div><label>Farmer Code *</label><input id="fc" placeholder="F001"></div><div><label>Farmer Name *</label><input id="fn"></div>
+<div><label>Mobile</label><input id="fm" inputmode="numeric"></div><div><label>Village</label><input id="fv"></div>
+<div><label>Cow Rate / Multiplier</label><input id="fcr" type="number" step=".01" placeholder="Optional"></div>
+<div><label>Buffalo Rate (₹ / FAT)</label><input id="fbr" type="number" step=".01" placeholder="9.00"></div>
+<div><label>Commission / Cut (₹ per L)</label><input id="fcm" type="number" step=".01" value="0"></div>
+<div><label>Rate Type</label><select id="frt"><option>Default</option><option>Farmer Specific</option><option>CLR</option><option>SNF</option></select></div>
+</div>
+<div class="actions"><button class="green" onclick="saveFarmer()">💾 Save Farmer</button><button class="gray" onclick="clearFarmer()">Clear</button></div>
+<input id="fs" placeholder="🔎 Search code/name/mobile" oninput="renderFarmers()">
+<div class="scroll"><table><thead><tr><th>Code</th><th>Name</th><th>Mobile</th><th>Village</th><th>Cow</th><th>Buffalo</th><th>Comm.</th><th>Rate Type</th><th>Action</th></tr></thead><tbody id="fr"></tbody></table></div>
+</section>
+
+<section id="milk" class="hide"><h2>🥛 Milk Purchase Entry</h2>
+<div class="row4"><div><label>Date</label><input id="md" type="date"></div><div><label>Shift</label><select id="ms"><option>Morning</option><option>Evening</option></select></div><div><label>Collection Time</label><input id="mctime" type="time"></div><div><label>Animal</label><select id="ma"><option>Cow</option><option>Buffalo</option></select></div></div><div class="row"><div><label>Farmer</label><select id="mf"></select></div><div class="note">⏰ Morning / Evening collection का exact time यहाँ save होगा और SMS/WhatsApp message में आएगा.</div></div>
+<div class="row4"><div><label>Milk (L)</label><input id="ml" type="number" step=".01"></div><div><label>FAT</label><input id="fat" type="number" step=".01"></div><div><label>SNF</label><input id="snf" type="number" step=".01"></div><div><label>CLR</label><input id="mclr" type="number" step=".1"></div></div>
+<div class="note">Cow: (FAT + SNF) × 340 / 100 × Milk. Buffalo: Buffalo Rate × FAT × Milk. Farmer commission is deducted from amount.</div>
+<div class="actions"><button class="green" onclick="saveMilk()">💾 Save Milk Entry</button><button class="gray" onclick="clearMilk()">Clear</button></div>
+<div class="scroll"><table><thead><tr><th>Date</th><th>Shift</th><th>Time</th><th>Farmer</th><th>Animal</th><th>Milk</th><th>FAT</th><th>SNF</th><th>CLR</th><th>Rate/Formula</th><th>Amount</th><th>Action</th></tr></thead><tbody id="mr"></tbody></table></div>
+</section>
+
+<section id="purchase" class="hide"><h2>🧾 Farmer Product Purchase / Issue</h2>
+<div class="row4"><div><label>Date</label><input id="pd" type="date"></div><div><label>Farmer</label><select id="pf"></select><small id="pfName"></small></div><div><label>Item</label><select id="pi"></select></div><div><label>Quantity</label><input id="pq" type="number" step=".01"></div></div>
+<div class="row3"><div><label>Rate</label><input id="pr" type="number" step=".01" oninput="calcPA()"></div><div><label>Amount</label><input id="pa" type="number" step=".01"></div><div><label>Remark</label><input id="premark"></div></div>
+<button class="green" onclick="savePurchase()">💾 Save Product Entry</button>
+<div class="scroll"><table><thead><tr><th>Date</th><th>Farmer</th><th>Item</th><th>Qty</th><th>Rate</th><th>Amount</th><th>Remark</th><th>Action</th></tr></thead><tbody id="pur"></tbody></table></div>
+</section>
+
+<section id="payment" class="hide"><h2>💰 Advance / Installment / Running Payment / AD / Cut-off</h2>
+<div class="row3"><div><label>Date</label><input id="td" type="date"></div><div><label>Farmer</label><select id="tf"></select></div><div><label>Type</label><select id="tt" onchange="paymentTypeUI()"><option>Advance Setup</option><option>Running Payment</option><option>AD (Addition)</option><option>Cut-off (Deduction)</option></select></div></div>
+<div id="advanceFields" class="row3"><div><label>Total Advance</label><input id="ta" type="number" step=".01"></div><div><label>Installment</label><input id="ti" type="number" step=".01" placeholder="2000 / 5000 / 10000"></div><div><label>Frequency</label><select id="tif"><option value="10day">Every 10 Days</option><option value="monthly">Every Month</option></select></div></div>
+<div id="normalAmount" class="row"><div><label>Amount</label><input id="tn" type="number" step=".01"></div><div><label>Remark</label><input id="tr"></div></div>
+<div class="note">10-Day Bill में Advance का केवल उस period का installment कटेगा। Running Payment, AD और Cut-off final balance में शामिल होंगे.</div>
+<button class="green" onclick="savePayment()">💾 Save</button>
+<div class="scroll"><table><thead><tr><th>Date</th><th>Farmer</th><th>Type</th><th>Amount</th><th>Installment</th><th>Frequency</th><th>Remark</th><th>Action</th></tr></thead><tbody id="pay"></tbody></table></div>
+</section>
+
+<section id="bill" class="hide"><h2 class="no-print">📅 Farmer 10-Day Bill</h2>
+<div class="row3 no-print"><div><label>Farmer</label><select id="bf" onchange="bill()"></select></div><div><label>Start Date</label><input id="bs" type="date" onchange="bill()"></div><div><label>End Date</label><input id="be" type="date" onchange="bill()"></div></div>
+<div class="actions no-print"><button class="blue" onclick="bill()">Generate Bill</button><button class="gray" onclick="backupCurrentBill()">💾 Save Bill</button><button class="gray" onclick="window.print()">🖨️ Print A4</button></div>
+<div id="br"></div></section>
+
+<section id="report" class="hide"><h2>📊 Daily Collection / Reports</h2>
+<div class="row3"><div><label>Start Date</label><input id="rs" type="date"></div><div><label>End Date</label><input id="re" type="date"></div><div><label>Shift</label><select id="rshift"><option>All</option><option>Morning</option><option>Evening</option></select></div></div>
+<div class="actions"><button class="blue" onclick="renderReport()">Calculate</button><button class="gray" onclick="window.print()">🖨️ Print</button><button class="green" onclick="exportCSV()">⬇️ Export CSV</button></div>
+<div class="stats" id="reportStats"></div><div class="scroll"><table><thead><tr><th>Date</th><th>Morning L</th><th>Evening L</th><th>Total L</th><th>FAT KG</th><th>Avg FAT</th><th>Amount</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+</section>
+
+<section id="products" class="hide"><h2>📦 Products / Rates</h2>
+<div class="row3"><div><label>Product Name</label><input id="prodName"></div><div><label>Default Rate ₹</label><input id="prodRate" type="number" step=".01"></div><div><label>Unit</label><select id="prodUnit"><option>Kg</option><option>Litre</option><option>Piece</option></select></div></div>
+<div class="actions"><button class="green" onclick="saveProduct()">+ Add / Save Product</button></div>
+<div class="scroll"><table><thead><tr><th>Product</th><th>Rate</th><th>Unit</th><th>Action</th></tr></thead><tbody id="prodRows"></tbody></table></div>
+</section>
+
+<section id="clr" class="hide"><h2>🐄 Cow CLR Rate List</h2>
+<div class="note">यहाँ FAT + CLR के हिसाब से rate table बना सकते हैं। चाहें तो बाद में अपनी rate-list image/PDF देखकर manually values भरकर Save कर सकते हैं।</div>
+<div class="row3"><div><label>FAT</label><input id="clrFat" type="number" step=".1" placeholder="3.2"></div><div><label>CLR</label><input id="clrValue" type="number" step=".1" placeholder="25"></div><div><label>Rate ₹ / L</label><input id="clrRate" type="number" step=".01"></div></div>
+<div class="actions"><button class="green" onclick="saveCLR()">💾 Save Rate</button><button class="blue" onclick="addCLRRange()">➕ FAT 3.2–5.0 Range</button></div>
+<div class="scroll"><table><thead><tr><th>FAT</th><th>CLR</th><th>Rate ₹/L</th><th>Action</th></tr></thead><tbody id="clrRows"></tbody></table></div>
+</section>
+
+<section id="settings" class="hide"><h2>⚙️ Settings</h2>
+<div class="row3"><div><label>Company Name</label><input id="setCompany" value="Shree Sendhav Dairy"></div><div><label>Address</label><input id="setAddress" value="Ashta, Dist. Sehore (M.P.)"></div><div><label>Mobile</label><input id="setMobile" value="9926502874"></div></div>
+<div class="row3"><div><label>Default Shift</label><select id="setShift"><option>Morning</option><option>Evening</option></select></div><div><label>Default Page</label><select id="setPage"><option>Dashboard</option><option>Milk Entry</option></select></div><div><label>Enter → Next Input</label><select id="setEnter"><option>ON</option><option>OFF</option></select></div></div>
+<div class="actions"><button class="green" onclick="saveSettings()">💾 Save Settings</button></div>
+</section>
+
+<section id="backup" class="hide"><h2>💾 Backup / Restore</h2>
+<div class="note">Backup file अपने computer/mobile में सुरक्षित रखें। Browser data clear होने पर backup से restore कर सकते हैं.</div>
+<div class="actions"><button class="green" onclick="downloadBackup()">⬇️ Full Data Backup</button><button class="blue" onclick="document.getElementById('restoreFile').click()">⬆️ Restore Backup</button><input id="restoreFile" type="file" accept=".json" style="display:none" onchange="restoreBackup(event)"><button class="red" onclick="clearAllData()">⚠️ Clear All Data</button></div>
+</section>
+
+<section id="whatsapp" class="hide"><h2>📱 WhatsApp / SMS</h2>
+<div class="note">Farmer का mobile number Farmer Master में save होना चाहिए.</div>
+<div class="row3"><div><label>Farmer</label><select id="wf" onchange="prepareMessage()"></select></div><div><label>Message Type</label><select id="wmtype" onchange="prepareMessage()"><option>10-Day Bill</option><option>Payment Received</option><option>Milk Summary</option><option>Morning Collection</option><option>Evening Collection</option></select></div><div><label>Message</label><textarea id="wmsg"></textarea></div></div>
+<h3>📅 Date + Shift Collection SMS</h3>
+<div class="row3"><div><label>Date</label><input id="smsDate" type="date"></div><div><label>Shift</label><select id="smsShift"><option>Morning</option><option>Evening</option></select></div><div><label>Report</label><button class="orange" style="width:100%" onclick="sendSelectedCollectionSMS()">📱 Send Collection SMS</button></div></div>
+<div class="actions"><button class="green" onclick="sendWhatsApp()">🟢 WhatsApp</button><button class="blue" onclick="sendSMS()">📱 SMS</button><button class="orange" onclick="sendCollectionSMS('Morning')">🌅 Today's Morning SMS</button><button class="orange" onclick="sendCollectionSMS('Evening')">🌆 Today's Evening SMS</button></div>
+<div class="card"><h3>Bulk Message Preparation</h3><p>नीचे सभी farmers के लिए अलग-अलग WhatsApp links बनाए जाएंगे.</p><button class="purple" onclick="bulkWhatsApp()">📱 Prepare Bulk WhatsApp Links</button><div id="bulkRows"></div></div>
+</section>
+<footer>Shree Sendhav Dairy V34 • Offline browser data • Backup regularly</footer>
+</main>
+
+<script>
+const K='SSD_DAIRY_V34';
+const defaultData={farmers:[],milk:[],purchases:[],payments:[],products:[
+{name:'Milk',rate:60,unit:'Litre'},{name:'Dahi',rate:80,unit:'Kg'},{name:'Ghee',rate:600,unit:'Kg'},{name:'Mawa',rate:320,unit:'Kg'},{name:'Paneer',rate:280,unit:'Kg'}],
+clr:[],settings:{company:'Shree Sendhav Dairy',address:'Ashta, Dist. Sehore (M.P.)',mobile:'9926502874',shift:'Morning',page:'Dashboard',enter:'ON'}};
+let D=JSON.parse(localStorage.getItem(K)||'null')||defaultData;
+
+/* V34 data migration: keep farmers/entries/products from the earlier V34 demo */
+(function migrateOldV34(){
+  try{
+    const oldF=JSON.parse(localStorage.getItem('ssd_v34_farmers')||'null');
+    const oldE=JSON.parse(localStorage.getItem('ssd_v34_entries')||'null');
+    const oldP=JSON.parse(localStorage.getItem('ssd_v34_products')||'null');
+
+    if(oldF && Array.isArray(oldF) && D.farmers.length===0){
+      D.farmers=oldF.map(f=>({
+        code:f.code||'', name:f.name||'', mobile:f.mobile||'', village:f.village||'',
+        cow:Number(f.crate||f.cow||0), buff:Number(f.brate||f.buff||0),
+        comm:Number(f.commission||f.comm||0), rateType:f.rateType||'Default'
+      })).filter(f=>f.code&&f.name);
+    }
+
+    if(oldE && Array.isArray(oldE) && D.milk.length===0){
+      D.milk=oldE.map(x=>({
+        date:x.date||T(), shift:x.shift||'Morning', farmer:x.code||x.farmer||'',
+        animal:x.animal||'Cow', milk:Number(x.milk)||0, fat:Number(x.fat)||0,
+        snf:Number(x.snf)||0, clr:Number(x.clr)||0, amount:Number(x.amount)||0
+      }));
+    }
+
+    if(oldP && Array.isArray(oldP) && D.purchases.length===0){
+      /* old demo products are catalog products, not farmer issue entries */
+      D.products=oldP.map(x=>({
+        name:x.name||x.product||'Other', rate:Number(x.rate)||0, unit:x.unit||'Kg'
+      }));
+    }
+    localStorage.setItem(K,JSON.stringify(D));
+  }catch(e){ console.log('V34 migration skipped',e); }
+})();
+const T=()=>new Date().toISOString().slice(0,10), M=n=>'₹'+(Number(n)||0).toFixed(2);
+const E=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+function save(){localStorage.setItem(K,JSON.stringify(D));refresh()}
+function show(id){document.querySelectorAll('section').forEach(x=>x.classList.add('hide'));document.getElementById(id).classList.remove('hide');refresh()}
+function opts(){['mf','pf','tf','bf','wf'].forEach(id=>{let s=document.getElementById(id);if(!s)return;let v=s.value;s.innerHTML='<option value="">Select Farmer</option>'+D.farmers.map(f=>`<option value="${E(f.code)}">${E(f.code)} - ${E(f.name)}</option>`).join('');if([...s.options].some(o=>o.value===v))s.value=v})}
+function saveFarmer(){let f={code:fc.value.trim(),name:fn.value.trim(),mobile:fm.value.trim(),village:fv.value.trim(),cow:+fcr.value||0,buff:+fbr.value||0,comm:+fcm.value||0,rateType:frt.value};if(!f.code||!f.name)return alert('Farmer Code aur Name bhariye');let i=D.farmers.findIndex(x=>x.code===f.code);i<0?D.farmers.push(f):D.farmers[i]=f;save();clearFarmer();alert('Farmer Saved ✅')}
+function clearFarmer(){['fc','fn','fm','fv','fcr','fbr','fcm'].forEach(id=>document.getElementById(id).value='');frt.value='Default'}
+function editFarmer(i){let f=D.farmers[i];fc.value=f.code;fn.value=f.name;fm.value=f.mobile;fv.value=f.village;fcr.value=f.cow||'';fbr.value=f.buff||'';fcm.value=f.comm||0;frt.value=f.rateType||'Default';show('farmer')}
+function delFarmer(i){if(confirm('Delete Farmer?')){D.farmers.splice(i,1);save()}}
+function renderFarmers(){let q=(fs.value||'').toLowerCase();fr.innerHTML=D.farmers.map((f,i)=>({f,i})).filter(o=>(o.f.code+' '+o.f.name+' '+o.f.mobile).toLowerCase().includes(q)).map(o=>{let f=o.f,i=o.i;return `<tr><td>${E(f.code)}</td><td>${E(f.name)}</td><td>${E(f.mobile)}</td><td>${E(f.village)}</td><td>${M(f.cow)}</td><td>${M(f.buff)}</td><td>${M(f.comm)}</td><td>${E(f.rateType||'Default')}</td><td><button class="gray" onclick="editFarmer(${i})">Edit</button> <button class="red" onclick="delFarmer(${i})">Delete</button></td></tr>`}).join('')}
+function milkAmount(f,a,q,fat,snf){let gross=a==='Cow'?((fat+snf)*340/100*q):((+f.buff||0)*fat*q);return Math.max(0,gross-(+f.comm||0)*q)}
+function saveMilk(){let f=D.farmers.find(x=>x.code===mf.value),q=+ml.value||0,fa=+fat.value||0,s=+snf.value||0;if(!f||q<=0||fa<=0)return alert('Farmer, Milk aur FAT bhariye');D.milk.push({date:md.value||T(),shift:ms.value,time:mctime.value||new Date().toTimeString().slice(0,5),farmer:f.code,animal:ma.value,milk:q,fat:fa,snf:s,clr:+mclr.value||0,amount:milkAmount(f,ma.value,q,fa,s)});save();alert('Milk Entry Saved ✅');clearMilk()}
+function clearMilk(){ml.value=fat.value=snf.value=mclr.value='';mctime.value=''}
+function editMilk(i){let x=D.milk[i];md.value=x.date;ms.value=x.shift;ma.value=x.animal;mf.value=x.farmer;ml.value=x.milk;fat.value=x.fat;snf.value=x.snf;mclr.value=x.clr||'';D.milk.splice(i,1);save();show('milk')}
+function delMilk(i){if(confirm('Milk entry delete kare?')){D.milk.splice(i,1);save()}}
+function renderMilk(){mr.innerHTML=D.milk.map((x,i)=>({x,i})).reverse().slice(0,150).map(o=>{let x=o.x,i=o.i;return `<tr><td>${x.date}</td><td>${x.shift}</td><td>${x.time||'-'}</td><td>${E(x.farmer)}</td><td>${x.animal}</td><td>${(+x.milk).toFixed(2)}</td><td>${(+x.fat).toFixed(2)}</td><td>${(+x.snf||0).toFixed(2)}</td><td>${(+x.clr||0).toFixed(1)}</td><td>${x.animal==='Cow'?'(FAT+SNF)×340/100':M((D.farmers.find(f=>f.code===x.farmer)||{}).buff||0)}</td><td>${M(x.amount)}</td><td><button class="gray" onclick="editMilk(${i})">Edit</button> <button class="red" onclick="delMilk(${i})">Delete</button></td></tr>`}).join('')}
+function calcPA(){pa.value=((+pq.value||0)*(+pr.value||0)).toFixed(2)}
+function updateProductUI(){pi.innerHTML=D.products.map(p=>`<option>${E(p.name)}</option>`).join('');let p=D.products.find(x=>x.name===pi.value);if(p&&!pr.value)pr.value=p.rate}
+function savePurchase(){if(!pf.value||!pa.value)return alert('Farmer aur Amount bhariye');D.purchases.push({date:pd.value||T(),farmer:pf.value,item:pi.value,qty:+pq.value||0,rate:+pr.value||0,amount:+pa.value,remark:premark.value});save();alert('Product Entry Saved ✅');pq.value=pr.value=pa.value=premark.value=''}
+function renderPurchases(){pur.innerHTML=D.purchases.map((x,i)=>({x,i})).reverse().slice(0,150).map(o=>{let x=o.x,i=o.i;return `<tr><td>${x.date}</td><td>${E(x.farmer)}</td><td>${E(x.item)}</td><td>${x.qty}</td><td>${M(x.rate)}</td><td>${M(x.amount)}</td><td>${E(x.remark)}</td><td><button class="red" onclick="delPurchase(${i})">Delete</button></td></tr>`}).join('')}
+function delPurchase(i){if(confirm('Product entry delete kare?')){D.purchases.splice(i,1);save()}}
+function paymentTypeUI(){let a=tt.value==='Advance Setup';advanceFields.style.display=a?'grid':'none';normalAmount.style.display=a?'none':'grid'}
+function savePayment(){let farmer=tf.value,type=tt.value,date=td.value||T();if(!farmer)return alert('Farmer chuniye');if(type==='Advance Setup'){let total=+ta.value||0,inst=+ti.value||0;if(total<=0||inst<=0)return alert('Total Advance aur Installment bhariye');D.payments.push({date,farmer,type,amount:total,installment:Math.min(inst,total),frequency:tif.value,remark:'Advance Setup'})}else{let amount=+tn.value||0;if(amount<=0)return alert('Amount bhariye');D.payments.push({date,farmer,type,amount,remark:tr.value})}save();alert('Payment Saved ✅');ta.value=ti.value=tn.value=tr.value=''}
+function renderPayments(){pay.innerHTML=D.payments.map((x,i)=>({x,i})).reverse().slice(0,150).map(o=>{let x=o.x,i=o.i;return `<tr><td>${x.date}</td><td>${E(x.farmer)}</td><td>${E(x.type)}</td><td>${M(x.amount)}</td><td>${x.installment?M(x.installment):'-'}</td><td>${x.frequency==='10day'?'10 Days':x.frequency==='monthly'?'Monthly':'-'}</td><td>${E(x.remark)}</td><td><button class="red" onclick="delPayment(${i})">Delete</button></td></tr>`}).join('')}
+function delPayment(i){if(confirm('Payment delete kare?')){D.payments.splice(i,1);save()}}
+function addDays(s,n){
+  const a=String(s||'').split('-').map(Number);
+  if(a.length!==3||!a[0]||!a[2]) return s;
+  const d=new Date(Date.UTC(a[0],a[1]-1,a[2]));
+  d.setUTCDate(d.getUTCDate()+Number(n||0));
+  return d.toISOString().slice(0,10);
+}
+function dateRange(start,end){
+  const out=[]; let cur=start, guard=0;
+  while(cur<=end && guard<370){
+    out.push(cur);
+    const next=addDays(cur,1);
+    if(next===cur) break;
+    cur=next; guard++;
+  }
+  return out;
+}
+function advanceForBill(c,s,e){let total=0,due=0;D.payments.filter(x=>x.farmer===c&&x.type==='Advance Setup'&&x.date<=e).forEach(a=>{total+=+a.amount||0;let inst=+a.installment||0,n=0,cur=a.date;while(cur<=e&&n<10000){if(cur>=s)due+=inst;n++;cur=a.frequency==='monthly'?monthAdd(a.date,n):addDays(a.date,n*10)}});let key='SSD_BILL_INST_'+c+'_'+s+'_'+e,saved=localStorage.getItem(key);if(saved!==null)due=Math.min(Math.max(0,+saved||0),total);return{total,due}}
+function monthAdd(s,n){let d=new Date(s+'T00:00:00'),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);d.setDate(Math.min(day,new Date(d.getFullYear(),d.getMonth()+1,0).getDate()));return d.toISOString().slice(0,10)}
+function applyInst(){
+ let farmer=document.getElementById('bf').value;
+ let start=document.getElementById('bs').value;
+ let end=document.getElementById('be').value;
+ let input=document.getElementById('billInst');
+ let amount=Number(input ? input.value : 0)||0;
+ if(!farmer||!start||!end)return alert('Farmer aur dates select karein');
+ let key='SSD_BILL_INST_'+farmer+'_'+start+'_'+end;
+ localStorage.setItem(key,String(amount));
+ bill();
+}
+
+function getEl(id){return document.getElementById(id)}
+function getFarmer(code){return D.farmers.find(f=>String(f.code)===String(code))}
+function safeDate(v){return v||T()}
+
+function bill(){
+ try{
+  const c=getEl('bf').value;
+  const s=getEl('bs').value;
+  const e=getEl('be').value;
+  const result=getEl('br');
+
+  if(!D.farmers || D.farmers.length===0){
+   result.innerHTML='<div class="danger"><b>Farmer data नहीं मिला.</b><br>Farmer Master में farmer save करें.</div>';
+   return;
+  }
+  if(!c){
+   result.innerHTML='<div class="note">ऊपर Farmer में किसान चुनें, फिर <b>Generate Bill</b> दबाएँ.</div>';
+   return;
+  }
+  if(!s||!e){
+   result.innerHTML='<div class="danger">Start Date और End Date चुनें.</div>';
+   return;
+  }
+  if(e<s){
+   result.innerHTML='<div class="danger">End Date, Start Date से पहले नहीं हो सकती.</div>';
+   return;
+  }
+
+  const f=getFarmer(c);
+  if(!f){
+   result.innerHTML='<div class="danger">Selected Farmer नहीं मिला. Page refresh करके फिर Farmer चुनें.</div>';
+   return;
+  }
+
+  const milk=D.milk.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+  const purchases=D.purchases.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+  const payments=D.payments.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+
+  const milkAmount=milk.reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const productAmount=purchases.reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const running=payments.filter(x=>x.type==='Running Payment').reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const addition=payments.filter(x=>x.type==='AD (Addition)').reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const cut=payments.filter(x=>x.type==='Cut-off (Deduction)').reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const adv=advanceForBill(c,s,e);
+  const installment=Number(adv.due)||0;
+
+  const totalMilk=milk.reduce((a,x)=>a+(Number(x.milk)||0),0);
+  const fatKg=milk.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+  const avgFat=totalMilk ? fatKg*100/totalMilk : 0;
+  const net=milkAmount-productAmount+addition-cut-installment-running;
+  const advanceRemaining=Math.max(0,(Number(adv.total)||0)-installment);
+
+  let rows='';
+  dateRange(s,e).forEach(cursor=>{
+   const day=milk.filter(x=>String(x.date)===String(cursor));
+   const morning=day.filter(x=>x.shift==='Morning').reduce((a,x)=>a+(Number(x.milk)||0),0);
+   const evening=day.filter(x=>x.shift==='Evening').reduce((a,x)=>a+(Number(x.milk)||0),0);
+   const dayFat=day.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+   rows+=`<tr><td>${E(cursor)}</td><td>${morning.toFixed(2)}</td><td>${evening.toFixed(2)}</td><td>${(morning+evening).toFixed(2)}</td><td>${dayFat.toFixed(3)}</td></tr>`;
+  });
+
+  const key='SSD_BILL_INST_'+c+'_'+s+'_'+e;
+  const saved=localStorage.getItem(key);
+  const shownInstallment=saved!==null?saved:installment;
+
+  result.innerHTML=`<div class="bill">
+   <h1>${E(D.settings.company)}</h1>
+   <div class="sub">MILK PURCHASE BILL • FARMER 10-DAY BILL</div>
+   <p><b>Farmer Code:</b> ${E(c)} &nbsp; <b>Name:</b> ${E(f.name)} &nbsp; <b>Mobile:</b> ${E(f.mobile||'')}</p>
+   <p><b>Period:</b> ${E(s)} to ${E(e)} &nbsp; <b>Village:</b> ${E(f.village||'')}</p>
+   <table><thead><tr><th>Date</th><th>Morning L</th><th>Evening L</th><th>Total L</th><th>FAT KG</th></tr></thead>
+   <tbody>${rows}</tbody></table>
+   <div class="summary">
+    <p>Total Milk: <b>${totalMilk.toFixed(2)} L</b> &nbsp; Average FAT: <b>${avgFat.toFixed(2)}</b> &nbsp; FAT KG: <b>${fatKg.toFixed(3)}</b></p>
+    <p>Milk Amount: <b>${M(milkAmount)}</b></p>
+    <p>Farmer Product Issue (-): <b>${M(productAmount)}</b></p>
+    <p>AD (+): <b>${M(addition)}</b></p>
+    <p>Cut-off (-): <b>${M(cut)}</b></p>
+    <p>Advance Installment (-): <b>${M(installment)}</b></p>
+    <p>Running Payment (-): <b>${M(running)}</b></p>
+    <p>Advance Remaining: <b>${M(advanceRemaining)}</b></p>
+    <hr><div class="balance">NET / FINAL BALANCE: ${M(net)}</div>
+   </div>
+   <div class="no-print actions">
+    <input id="billInst" type="number" value="${E(shownInstallment)}" placeholder="Installment">
+    <button class="green" id="saveBillInstBtn">Installment Save</button>
+    <button class="blue" id="billWaBtn">📱 WhatsApp Bill</button>
+    <button class="blue" id="billSmsBtn">📱 SMS Bill</button>
+   </div>
+  </div>`;
+
+  getEl('saveBillInstBtn').addEventListener('click',applyInst);
+  getEl('billWaBtn').addEventListener('click',sendBillWhatsApp);
+  getEl('billSmsBtn').addEventListener('click',sendBillSMS);
+ }catch(err){
+  console.error(err);
+  getEl('br').innerHTML='<div class="danger"><b>Bill में error आया.</b><br>कृपया page refresh करके दोबारा कोशिश करें.</div>';
+ }
+}
+
+function sendBillText(){
+ const c=getEl('bf').value,s=getEl('bs').value,e=getEl('be').value,f=getFarmer(c);
+ if(!f)return '';
+ const ms=D.milk.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+ const milk=ms.reduce((a,x)=>a+(Number(x.milk)||0),0);
+ const kg=ms.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+ const amt=ms.reduce((a,x)=>a+(Number(x.amount)||0),0);
+ return `Shree Sendhav Dairy 10-Day Bill
+Farmer: ${f.name} (${c})
+Period: ${s} to ${e}
+Milk: ${milk.toFixed(2)} L
+FAT KG: ${kg.toFixed(3)}
+Milk Amount: ${M(amt)}
+Thank you.`;
+}
+function sendBillWhatsApp(){
+ const f=getFarmer(getEl('bf').value),m=String(f?.mobile||'').replace(/\D/g,'');
+ if(m.length<10)return alert('Farmer का 10 digit mobile number Farmer Master में save करें');
+ window.location.href='https://wa.me/91'+m+'?text='+encodeURIComponent(sendBillText());
+}
+function sendBillSMS(){
+ const f=getFarmer(getEl('bf').value),m=String(f?.mobile||'').replace(/\D/g,'');
+ if(m.length<10)return alert('Farmer का 10 digit mobile number Farmer Master में save करें');
+ window.location.href='sms:'+m+'?body='+encodeURIComponent(sendBillText());
+}
+
+function renderReport(){
+ try{
+  const rs=getEl('rs'),re=getEl('re'),rshift=getEl('rshift');
+  const s=rs.value||T(), e=re.value||T(), sh=rshift.value;
+  const dates=dateRange(s,e);
+  let rows='',tm=0,tfat=0,ta=0,mo=0,ev=0;
+  dates.forEach(cursor=>{
+    const a=D.milk.filter(x=>String(x.date)===String(cursor)&&(sh==='All'||x.shift===sh));
+    const m=a.filter(x=>x.shift==='Morning').reduce((z,x)=>z+(Number(x.milk)||0),0);
+    const v=a.filter(x=>x.shift==='Evening').reduce((z,x)=>z+(Number(x.milk)||0),0);
+    const milk=a.reduce((z,x)=>z+(Number(x.milk)||0),0);
+    const kg=a.reduce((z,x)=>z+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+    const amt=a.reduce((z,x)=>z+(Number(x.amount)||0),0);
+    const avg=milk?kg*100/milk:0;
+    mo+=m; ev+=v; tm+=milk; tfat+=kg; ta+=amt;
+    rows+=`<tr><td>${E(cursor)}</td><td>${m.toFixed(2)}</td><td>${v.toFixed(2)}</td><td>${milk.toFixed(2)}</td><td>${kg.toFixed(3)}</td><td>${avg.toFixed(2)}</td><td>${M(amt)}</td></tr>`;
+  });
+  if(!dates.length){
+    rows='<tr><td colspan="7">Start Date और End Date सही चुनें.</td></tr>';
+  }
+  getEl('reportRows').innerHTML=rows;
+  getEl('reportStats').innerHTML=`<div>Morning<b>${mo.toFixed(2)} L</b></div><div>Evening<b>${ev.toFixed(2)} L</b></div><div>Total Milk<b>${tm.toFixed(2)} L</b></div><div>Total FAT KG<b>${tfat.toFixed(3)}</b></div><div>Average FAT<b>${tm?(tfat*100/tm).toFixed(2):'0.00'}</b></div><div>Total Amount<b>${M(ta)}</b></div>`;
+ }catch(err){
+  console.error(err);
+  getEl('reportRows').innerHTML='<tr><td colspan="7">Report में error आया. Page refresh करें.</td></tr>';
+ }
+}
+function exportCSV(){let rows=[['Date','Shift','Farmer','Animal','Milk','FAT','SNF','CLR','Amount'],...D.milk.map(x=>[x.date,x.shift,x.farmer,x.animal,x.milk,x.fat,x.snf,x.clr,x.amount])];let csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='Shree_Sendhav_Milk_Report.csv';a.click()}
+function saveProduct(){let n=prodName.value.trim(),r=+prodRate.value||0,u=prodUnit.value;if(!n)return alert('Product name bhariye');let i=D.products.findIndex(p=>p.name.toLowerCase()===n.toLowerCase());i<0?D.products.push({name:n,rate:r,unit:u}):D.products[i]={name:n,rate:r,unit:u};save();prodName.value=prodRate.value='';renderProducts();updateProductUI()}
+function delProduct(i){D.products.splice(i,1);save()}
+function renderProducts(){prodRows.innerHTML=D.products.map((p,i)=>`<tr><td>${E(p.name)}</td><td>${M(p.rate)}</td><td>${E(p.unit)}</td><td><button class="red" onclick="delProduct(${i})">Delete</button></td></tr>`).join('')}
+function saveCLR(){let fat=+clrFat.value,clr=+clrValue.value,rate=+clrRate.value;if(!fat||!rate)return alert('FAT aur Rate bhariye');D.clr.push({fat,clr,rate});D.clr.sort((a,b)=>a.fat-b.fat||a.clr-b.clr);save();renderCLR()}
+function addCLRRange(){let base=+prompt('Starting CLR?','25');let rate=+prompt('Rate for FAT 3.2?','30');if(!rate)return;for(let f=3.2;f<=5.001;f+=.1)D.clr.push({fat:+f.toFixed(1),clr:base,rate:+(rate+(f-3.2)*2).toFixed(2)});save();renderCLR()}
+function renderCLR(){clrRows.innerHTML=D.clr.map((x,i)=>`<tr><td>${x.fat.toFixed(1)}</td><td>${x.clr||'-'}</td><td>${M(x.rate)}</td><td><button class="red" onclick="D.clr.splice(${i},1);save();renderCLR()">Delete</button></td></tr>`).join('')}
+function saveSettings(){D.settings={company:setCompany.value,address:setAddress.value,mobile:setMobile.value,shift:setShift.value,page:setPage.value,enter:setEnter.value};save();alert('Settings Saved ✅')}
+function loadSettings(){setCompany.value=D.settings.company;setAddress.value=D.settings.address;setMobile.value=D.settings.mobile;setShift.value=D.settings.shift;setPage.value=D.settings.page;setEnter.value=D.settings.enter}
+function downloadBackup(){let o={version:'V34',created:new Date().toISOString(),data:D};let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,2)],{type:'application/json'}));a.download='Shree_Sendhav_Dairy_V34_Backup_'+T()+'.json';a.click()}
+function restoreBackup(ev){let f=ev.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let o=JSON.parse(r.result);if(!o.data||!o.data.farmers)throw 0;D=o.data;save();loadSettings();alert('Backup Restore ho gaya ✅')}catch(e){alert('Invalid backup file')}};r.readAsText(f)}
+function clearAllData(){if(confirm('सारा local data delete होगा. Continue?')){localStorage.removeItem(K);location.reload()}}
+function collectionMessageFor(f,shift,date){
+  let ms=D.milk.filter(x=>x.farmer===f.code&&x.date===date&&x.shift===shift);
+  if(!ms.length)return `Shree Sendhav Dairy: ${f.name}, ${date} की ${shift} collection entry नहीं मिली.`;
+  let milk=ms.reduce((a,x)=>a+(Number(x.milk)||0),0),amt=ms.reduce((a,x)=>a+(Number(x.amount)||0),0),kg=ms.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0),times=ms.map(x=>x.time||'-').join(', ');
+  return `Shree Sendhav Dairy
+Farmer: ${f.name}
+Date: ${date}
+${shift} Collection
+Time: ${times}
+Milk: ${milk.toFixed(2)} L
+FAT KG: ${kg.toFixed(3)}
+Amount: ${M(amt)}
+Thank you.`}
+function collectionMessage(f,shift){return collectionMessageFor(f,shift,T())}
+function prepareMessage(){let f=D.farmers.find(x=>x.code===wf.value);if(!f){wmsg.value='';return}let t=wmtype.value;wmsg.value=t==='Payment Received'?`Shree Sendhav Dairy: Payment received. Thank you ${f.name}.`:t==='Milk Summary'?`Shree Sendhav Dairy: Dear ${f.name}, your milk entries are recorded. Thank you.`:t==='Morning Collection'?collectionMessage(f,'Morning'):t==='Evening Collection'?collectionMessage(f,'Evening'):sendFarmerBillText(f)}
+function sendCollectionSMS(shift){let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');if(!m)return alert('Farmer select karein aur mobile number save karein');location.href='sms:'+m+'?body='+encodeURIComponent(collectionMessage(f,shift))}
+function sendSelectedCollectionSMS(){
+  let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');
+  let date=document.getElementById('smsDate')?.value||T(),shift=document.getElementById('smsShift')?.value||'Morning';
+  if(!f)return alert('Farmer select karein');
+  if(!m)return alert('Farmer ka mobile number save karein');
+  location.href='sms:'+m+'?body='+encodeURIComponent(collectionMessageFor(f,shift,date));
+}
+function sendFarmerBillText(f){let end=T(),start=addDays(end,-9),ms=D.milk.filter(x=>x.farmer===f.code&&x.date>=start&&x.date<=end),milk=ms.reduce((a,x)=>a+x.milk,0),amt=ms.reduce((a,x)=>a+x.amount,0);return `Shree Sendhav Dairy - 10 Day Summary\nFarmer: ${f.name}\nPeriod: ${start} to ${end}\nMilk: ${milk.toFixed(2)} L\nAmount: ${M(amt)}`}
+function sendWhatsApp(){let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');if(!m)return alert('Mobile number saved nahi hai');location.href='https://wa.me/91'+m+'?text='+encodeURIComponent(wmsg.value)}
+function sendSMS(){let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');if(!m)return alert('Mobile number saved nahi hai');location.href='sms:'+m+'?body='+encodeURIComponent(wmsg.value)}
+function bulkWhatsApp(){let out=D.farmers.filter(f=>f.mobile).map(f=>`<p><b>${E(f.code)} - ${E(f.name)}</b> <a href="https://wa.me/91${String(f.mobile).replace(/\D/g,'')}?text=${encodeURIComponent(sendFarmerBillText(f))}" target="_blank">Open WhatsApp</a></p>`).join('');bulkRows.innerHTML=out||'<p>No mobile numbers saved.</p>'}
+function refresh(){opts();renderFarmers();renderMilk();renderPurchases();renderPayments();renderProducts();renderCLR();updateProductUI();let x=D.milk.filter(a=>a.date===T()),ded=D.purchases.filter(a=>a.date===T()).reduce((z,a)=>z+a.amount,0)+D.payments.filter(a=>a.date===T()&&(a.type==='Cut-off (Deduction)'||a.type==='Running Payment')).reduce((z,a)=>z+a.amount,0),amt=x.reduce((a,z)=>a+z.amount,0);df.textContent=D.farmers.length;dm.textContent=x.reduce((a,z)=>a+z.milk,0).toFixed(2)+' L';dkg.textContent=x.reduce((a,z)=>a+z.milk*z.fat/100,0).toFixed(3);da.textContent=M(amt);dd.textContent=M(ded);dn.textContent=M(amt-ded);dmo.textContent=x.filter(a=>a.shift==='Morning').reduce((a,z)=>a+z.milk,0).toFixed(2)+' L';dev.textContent=x.filter(a=>a.shift==='Evening').reduce((a,z)=>a+z.milk,0).toFixed(2)+' L';dashSummary.innerHTML=`Morning ${document.getElementById('dmo').textContent} • Evening ${document.getElementById('dev').textContent}`;loadSettings()}
+function backupCurrentBill(){if(!bf.value||!bs.value||!be.value)return alert('Farmer aur dates select karein');let c=bf.value,s=bs.value,e=be.value,ms=D.milk.filter(x=>x.farmer===c&&x.date>=s&&x.date<=e),f=D.farmers.find(x=>x.code===c),arr=JSON.parse(localStorage.getItem('SSD_SAVED_BILLS')||'[]');arr=arr.filter(x=>!(x.farmer===c&&x.start===s&&x.end===e));arr.push({id:Date.now(),farmer:c,name:f?.name||c,start:s,end:e,milk:ms.reduce((a,x)=>a+x.milk,0),amount:ms.reduce((a,x)=>a+x.amount,0)});localStorage.setItem('SSD_SAVED_BILLS',JSON.stringify(arr));alert('Bill saved ✅')}
+document.getElementById('pf').addEventListener('change',()=>{let f=D.farmers.find(x=>x.code===pf.value);pfName.textContent=f?'Farmer Name: '+f.name:''});
+document.getElementById('pi').addEventListener('change',()=>{let p=D.products.find(x=>x.name===pi.value);if(p)pr.value=p.rate});
+document.getElementById('md').value=T();document.getElementById('pd').value=T();document.getElementById('td').value=T();document.getElementById('smsDate').value=T();let z=new Date();z.setDate(z.getDate()-9);document.getElementById('bs').value=z.toISOString().slice(0,10);document.getElementById('be').value=T();document.getElementById('rs').value=document.getElementById('bs').value;document.getElementById('re').value=T();
+if(document.getElementById('smsDate')) document.getElementById('smsDate').value=T();
+refresh();paymentTypeUI();
+getEl('bf').addEventListener('change',bill);
+getEl('bs').addEventListener('change',bill);
+getEl('be').addEventListener('change',bill);
+getEl('rshift').addEventListener('change',renderReport);
+getEl('rs').addEventListener('change',renderReport);
+getEl('re').addEventListener('change',renderReport);
+
+</script>
+</body></html>
