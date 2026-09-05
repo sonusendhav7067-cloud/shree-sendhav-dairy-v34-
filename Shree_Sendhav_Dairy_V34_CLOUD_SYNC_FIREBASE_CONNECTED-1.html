@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shree Sendhav Dairy V34</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef3f9;color:#172033}
+header{background:linear-gradient(135deg,#005da8,#0876c9);color:#fff;text-align:center;padding:18px 10px;box-shadow:0 3px 12px #0003}
+header h1{margin:0;font-size:28px}header div{margin-top:5px}
+main{max-width:1250px;margin:auto;padding:14px}
+nav{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}
+button{border:0;border-radius:9px;padding:12px;font-weight:bold;cursor:pointer}
+nav button,.blue{background:#0565ad;color:#fff}.green{background:#008d3d;color:#fff}.red{background:#c62828;color:#fff}.gray{background:#e6edf4;color:#172033}.orange{background:#e88a00;color:#fff}.purple{background:#6b43a5;color:#fff}
+section{background:#fff;border-radius:15px;padding:16px;margin-top:14px;box-shadow:0 3px 12px #0002}
+.hide{display:none}h2{color:#075b9d;margin-top:0}h3{color:#075b9d}
+.row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+label{display:block;font-weight:bold;margin:8px 0 5px}input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5df;border-radius:8px;font-size:15px}textarea{min-height:80px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.scroll{overflow:auto}
+table{border-collapse:collapse;width:100%;min-width:780px}th,td{padding:8px;border:1px solid #d8dee6;text-align:left}th{background:#075b9d;color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stats div{background:#e9f4ff;padding:14px;border-radius:10px}.stats b{display:block;font-size:23px;margin-top:5px}
+.cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{padding:15px;border-radius:12px;background:#f5f9fd;border:1px solid #dde6ef}
+.note{background:#fff7df;padding:12px;border-radius:9px;margin:10px 0}.success{background:#eaf8ee;padding:12px;border-radius:9px}.danger{background:#fff0f0;padding:12px;border-radius:9px}
+.balance{font-size:26px;font-weight:bold;color:#075b9d}.small{font-size:12px;color:#59636f}
+.kpi-red{background:#fff0f0!important}.kpi-green{background:#ecfaef!important}.kpi-purple{background:#f4edff!important}
+.bill{border:1px solid #222;padding:14px;background:#fff}.bill h1{text-align:center;margin:0}.bill .sub{text-align:center;font-weight:bold}
+.bill table{min-width:0;font-size:12px}.bill th{background:#222}.bill .total td{font-weight:bold;background:#f2f2f2}.bill .summary{margin-top:10px;border:1px solid #222;padding:10px}
+.tag{display:inline-block;padding:5px 8px;border-radius:20px;background:#e8f2ff;margin:2px}
+footer{text-align:center;padding:20px;color:#667}
+@media(max-width:700px){nav{grid-template-columns:repeat(2,1fr)}.row,.row3,.row4,.cardgrid,.stats{grid-template-columns:1fr}.stats div{min-height:70px}}
+@media print{@page{size:A4;margin:8mm}body{background:#fff}header,nav,#dash,#farmer,#milk,#purchase,#payment,#report,#products,#settings,#clr,#backup,.no-print{display:none!important}main{padding:0;margin:0;max-width:none}#bill{display:block!important;box-shadow:none;margin:0}.bill{border:0}}
+
+.clr-mobile-help{background:#eaf4ff;padding:12px;border-radius:9px;margin:10px 0;font-weight:bold}
+#clrGrid{min-width:1250px}
+#clrGrid .clrCell{width:58px;min-width:58px;height:48px;padding:6px;font-size:16px;text-align:center;background:#fff;color:#111;pointer-events:auto;touch-action:manipulation}
+#clrGrid td{padding:3px}
+#clrGrid input:focus{outline:3px solid #1976d2;border-color:#1976d2}
+#clrReadPhotoBtn{display:block!important;visibility:visible!important;opacity:1!important}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<style>
+/* Mobile-friendly Cow CLR rate cells */
+#clrGrid{min-width:1420px!important;border-collapse:collapse}
+#clrGrid th,#clrGrid td{min-width:58px!important;width:58px!important;padding:6px!important;text-align:center!important}
+#clrGrid th:first-child,#clrGrid td:first-child{min-width:58px!important;width:58px!important}
+#clrGrid input.clrCell{
+  display:block!important;
+  width:54px!important;
+  min-width:54px!important;
+  height:46px!important;
+  margin:0 auto!important;
+  padding:7px 3px!important;
+  font-size:16px!important;
+  text-align:center!important;
+  background:#fff!important;
+  color:#111!important;
+  border:1px solid #9aa7b3!important;
+  border-radius:8px!important;
+  pointer-events:auto!important;
+  user-select:text!important;
+  -webkit-user-select:text!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+#clrGrid input.clrCell:focus{outline:3px solid #0876c9!important;border-color:#075b9d!important}
+#clrGrid input.clrCell[readonly],#clrGrid input.clrCell[disabled]{opacity:1!important;background:#fff!important;color:#111!important}
+.clr-mobile-help{background:#eaf5ff;padding:10px;border-radius:8px;margin:8px 0;font-weight:bold}
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+</head>
+<body><div class="actions" style="padding:10px"><button class="blue" onclick="document.getElementById('cloudsync').scrollIntoView({behavior:'smooth'})">☁️ Cloud Sync</button></div>
+
+<div id="cloudsync" class="section">
+  <h2>☁️ Mobile ↔ Computer Cloud Sync</h2>
+  <div class="note">
+    Mobile और computer अलग-अलग Wi‑Fi पर भी sync रहेंगे। दोनों devices internet के through एक ही Firebase/Google account में sign-in करेंगे।
+    Internet बंद होने पर data device में रहेगा और internet आते ही sync किया जा सकता है।
+  </div>
+  <div class="card">
+    <h3>1️⃣ Firebase Web Config</h3>
+    <p class="small">Firebase Web App का config पहले से लगा हुआ है। Database की सुरक्षा Authentication + Firestore Rules से होगी।</p>
+    <textarea id="fbConfig" rows="8">{
+  "apiKey": "AIzaSyDX-hLgdliAV3jK6NZvtfK--rGoUvyHx3I",
+  "authDomain": "shree-sendhav-dairy-v-34.firebaseapp.com",
+  "projectId": "shree-sendhav-dairy-v-34",
+  "storageBucket": "shree-sendhav-dairy-v-34.firebasestorage.app",
+  "messagingSenderId": "1035106809417",
+  "appId": "1:1035106809417:web:795fb986d495e189b97198"
+}</textarea>
+    <div class="actions">
+      <button class="blue" onclick="cloudInit()">🔌 Connect Firebase</button>
+      <button class="gray" onclick="cloudClearConfig()">Clear Config</button>
+    </div>
+    <div id="cloudStatus" class="note">Not connected</div>
+  </div>
+  <div class="card">
+    <h3>2️⃣ Google Account</h3>
+    <div class="actions">
+      <button class="blue" onclick="cloudGoogleSignIn()">🔐 Sign in with Google</button>
+      <button class="gray" onclick="cloudSignOut()">Sign out</button>
+    </div>
+    <div id="cloudUser" class="small">Not signed in</div>
+  </div>
+  <div class="card">
+    <h3>3️⃣ Sync</h3>
+    <div class="actions">
+      <button class="green" onclick="cloudSyncNow()">🔄 Sync Now</button>
+      <button class="blue" onclick="cloudDownload()">☁️ Cloud → Device</button>
+      <button class="gray" onclick="cloudUpload()">📤 Device → Cloud</button>
+    </div>
+    <label><input id="cloudAuto" type="checkbox" checked> Auto sync changes when internet is available</label>
+    <div id="cloudLast" class="small"></div>
+  </div>
+  <div class="note"><b>Firestore Rules:</b> Firebase Console → Firestore → Rules में नीचे वाले rules लगाएँ।</div>
+  <pre style="white-space:pre-wrap;background:#f5f5f5;padding:12px;border-radius:10px">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /dairySync/{uid}/kv/{key} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}</pre>
+</div>
+
+
+<header><h1>🥛 Shree Sendhav Dairy V34</h1><div>Milk Purchase & Farmer Management System</div></header>
+<main>
+<nav>
+<button onclick="show('dash')">🏠 Dashboard</button>
+<button onclick="show('farmer')">👨‍🌾 Farmer Master</button>
+<button onclick="show('milk')">🥛 Milk Entry</button>
+<button onclick="show('purchase')">🧾 Farmer Purchase</button>
+<button onclick="show('payment')">💰 Payments / AD / Cut-off</button>
+<button onclick="show('bill')">📅 10-Day Bill</button>
+<button onclick="show('report')">📊 Reports</button>
+<button onclick="show('products')">📦 Products</button>
+<button onclick="show('clr')">🐄 Cow CLR Rate List</button>
+<button onclick="show('settings')">⚙️ Settings</button>
+<button onclick="show('backup')">💾 Backup / Restore</button>
+<button onclick="show('whatsapp')">📱 WhatsApp / SMS</button>
+</nav>
+
+<section id="dash"><h2>Dashboard</h2>
+<div class="stats">
+<div>Total Farmers<b id="df">0</b></div><div>Today's Milk<b id="dm">0.00 L</b></div>
+<div>Today's FAT KG<b id="dkg">0.000</b></div><div>Today's Purchase<b id="da">₹0.00</b></div>
+<div class="kpi-red">Today's Deductions<b id="dd">₹0.00</b></div>
+<div class="kpi-green">Net Today<b id="dn">₹0.00</b></div>
+<div>Morning Milk<b id="dmo">0.00 L</b></div><div>Evening Milk<b id="dev">0.00 L</b></div>
+</div>
+<div class="cardgrid">
+<div class="card"><h3>Quick Actions</h3><button class="blue" onclick="show('milk')">🥛 Milk Entry</button> <button class="blue" onclick="show('farmer')">👨‍🌾 Farmer</button></div>
+<div class="card"><h3>Today's Summary</h3><div id="dashSummary">No entries yet.</div></div>
+<div class="card"><h3>Data Safety</h3><div>Data is stored locally in this browser. Use Backup regularly.</div></div>
+</div>
+</section>
+
+<section id="farmer" class="hide"><h2>👨‍🌾 Farmer Master</h2>
+<div class="row">
+<div><label>Farmer Code *</label><input id="fc" placeholder="F001"></div><div><label>Farmer Name *</label><input id="fn"></div>
+<div><label>Mobile</label><input id="fm" inputmode="numeric"></div><div><label>Village</label><input id="fv"></div>
+<div><label>Cow Rate / Multiplier</label><input id="fcr" type="number" step=".01" placeholder="Optional"></div>
+<div><label>Buffalo Rate (₹ / FAT)</label><input id="fbr" type="number" step=".01" placeholder="9.00"></div>
+<div><label>Commission / Cut (₹ per L)</label><input id="fcm" type="number" step=".01" value="0"></div>
+<div><label>Rate Type</label><select id="frt"><option>Default</option><option>Farmer Specific</option><option>CLR</option><option>SNF</option></select></div><div><label>🐄 Cow CLR Rate Chart</label><select id="fchart"><option value="">Default Chart</option></select></div>
+</div>
+<div class="actions"><button class="green" onclick="saveFarmer()">💾 Save Farmer</button><button class="gray" onclick="clearFarmer()">Clear</button></div>
+<input id="fs" placeholder="🔎 Search code/name/mobile" oninput="renderFarmers()">
+<div class="scroll"><table><thead><tr><th>Code</th><th>Name</th><th>Mobile</th><th>Village</th><th>Cow</th><th>Buffalo</th><th>Comm.</th><th>Rate Type</th><th>Action</th></tr></thead><tbody id="fr"></tbody></table></div>
+</section>
+
+<section id="milk" class="hide"><h2>🥛 Milk Purchase Entry</h2>
+<div class="row4"><div><label>Date</label><input id="md" type="date"></div><div><label>Shift</label><select id="ms"><option>Morning</option><option>Evening</option></select></div><div><label>Collection Time</label><input id="mctime" type="time"></div><div><label>Animal</label><select id="ma"><option>Cow</option><option>Buffalo</option></select></div></div><div class="row"><div><label>Farmer</label><select id="mf"></select></div><div class="note">⏰ Morning / Evening collection का exact time यहाँ save होगा और SMS/WhatsApp message में आएगा.</div></div>
+<div class="row4"><div><label>Milk (L)</label><input id="ml" type="number" step=".01"></div><div><label>FAT</label><input id="fat" type="number" step=".01"></div><div><label>SNF</label><input id="snf" type="number" step=".01"></div><div><label>CLR</label><input id="mclr" type="number" step=".1"></div></div>
+<div class="note" id="cowRateLiveHint">🐄 Cow: Farmer + FAT + CLR डालने पर assigned Cow CLR Chart से rate लिया जाएगा।</div>
+
+<div class="note">Cow: (FAT + SNF) × 340 / 100 × Milk. Buffalo: Buffalo Rate × FAT × Milk. Farmer commission is deducted from amount.</div>
+<div class="actions"><button class="green" onclick="saveMilk()">💾 Save Milk Entry</button><button class="gray" onclick="clearMilk()">Clear</button></div>
+<div class="scroll"><table><thead><tr><th>Date</th><th>Shift</th><th>Time</th><th>Farmer</th><th>Animal</th><th>Milk</th><th>FAT</th><th>SNF</th><th>CLR</th><th>Rate/Formula</th><th>Amount</th><th>Action</th></tr></thead><tbody id="mr"></tbody></table></div>
+</section>
+
+<section id="purchase" class="hide"><h2>🧾 Farmer Product Purchase / Issue</h2>
+<div class="row4"><div><label>Date</label><input id="pd" type="date"></div><div><label>Farmer</label><select id="pf"></select><small id="pfName"></small></div><div><label>Item</label><select id="pi"></select></div><div><label>Quantity</label><input id="pq" type="number" step=".01"></div></div>
+<div class="row3"><div><label>Rate</label><input id="pr" type="number" step=".01" oninput="calcPA()"></div><div><label>Amount</label><input id="pa" type="number" step=".01"></div><div><label>Remark</label><input id="premark"></div></div>
+<button class="green" onclick="savePurchase()">💾 Save Product Entry</button>
+<div class="scroll"><table><thead><tr><th>Date</th><th>Farmer</th><th>Item</th><th>Qty</th><th>Rate</th><th>Amount</th><th>Remark</th><th>Action</th></tr></thead><tbody id="pur"></tbody></table></div>
+</section>
+
+<section id="payment" class="hide"><h2>💰 Advance / Installment / Running Payment / AD / Cut-off</h2>
+<div class="row3"><div><label>Date</label><input id="td" type="date"></div><div><label>Farmer</label><select id="tf"></select></div><div><label>Type</label><select id="tt" onchange="paymentTypeUI()"><option>Advance Setup</option><option>Running Payment</option><option>AD (Addition)</option><option>Cut-off (Deduction)</option></select></div></div>
+<div id="advanceFields" class="row3"><div><label>Total Advance</label><input id="ta" type="number" step=".01"></div><div><label>Installment</label><input id="ti" type="number" step=".01" placeholder="2000 / 5000 / 10000"></div><div><label>Frequency</label><select id="tif"><option value="10day">Every 10 Days</option><option value="monthly">Every Month</option></select></div></div>
+<div id="normalAmount" class="row"><div><label>Amount</label><input id="tn" type="number" step=".01"></div><div><label>Remark</label><input id="tr"></div></div>
+<div class="note">10-Day Bill में Advance का केवल उस period का installment कटेगा। Running Payment, AD और Cut-off final balance में शामिल होंगे.</div>
+<button class="green" onclick="savePayment()">💾 Save</button>
+<div class="scroll"><table><thead><tr><th>Date</th><th>Farmer</th><th>Type</th><th>Amount</th><th>Installment</th><th>Frequency</th><th>Remark</th><th>Action</th></tr></thead><tbody id="pay"></tbody></table></div>
+</section>
+
+<section id="bill" class="hide"><h2 class="no-print">📅 Farmer 10-Day Bill</h2>
+<div class="row3 no-print"><div><label>Farmer</label><select id="bf" onchange="bill()"></select></div><div><label>Start Date</label><input id="bs" type="date" onchange="bill()"></div><div><label>End Date</label><input id="be" type="date" onchange="bill()"></div></div>
+<div class="actions no-print"><button class="blue" onclick="bill()">Generate Bill</button><button class="gray" onclick="backupCurrentBill()">💾 Save Bill</button><button class="gray" onclick="window.print()">🖨️ Print A4</button></div>
+<div id="br"></div></section>
+
+<section id="report" class="hide"><h2>📊 Daily Collection / Reports</h2>
+<div class="row3"><div><label>Start Date</label><input id="rs" type="date"></div><div><label>End Date</label><input id="re" type="date"></div><div><label>Shift</label><select id="rshift"><option>All</option><option>Morning</option><option>Evening</option></select></div></div>
+<div class="actions"><button class="blue" onclick="renderReport()">Calculate</button><button class="gray" onclick="window.print()">🖨️ Print</button><button class="green" onclick="exportCSV()">⬇️ Export CSV</button></div>
+<div class="stats" id="reportStats"></div><div class="scroll"><table><thead><tr><th>Date</th><th>Morning L</th><th>Evening L</th><th>Total L</th><th>FAT KG</th><th>Avg FAT</th><th>Amount</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+</section>
+
+<section id="products" class="hide"><h2>📦 Products / Rates</h2>
+<div class="row3"><div><label>Product Name</label><input id="prodName"></div><div><label>Default Rate ₹</label><input id="prodRate" type="number" step=".01"></div><div><label>Unit</label><select id="prodUnit"><option>Kg</option><option>Litre</option><option>Piece</option></select></div></div>
+<div class="actions"><button class="green" onclick="saveProduct()">+ Add / Save Product</button></div>
+<div class="scroll"><table><thead><tr><th>Product</th><th>Rate</th><th>Unit</th><th>Action</th></tr></thead><tbody id="prodRows"></tbody></table></div>
+</section>
+
+
+
+<section id="clr" class="hide"><h2>🐄 Cow CLR Rate List</h2>
+<div class="card">
+  <h3>📷 Rate Chart Photo → Automatic Chart</h3>
+  <div class="note">अपनी पूरी Cow FAT + CLR rate-chart photo/PDF में से <b>photo</b> चुनें। Software photo को सीधा करके 3.0–5.0 FAT और CLR 25–30 के rates table में डालने की कोशिश करेगा। OCR के बाद values check/correct करके Save करें।</div>
+  <input id="clrOcrPhoto" type="file" accept="image/*,.jpg,.jpeg,.png,.webp">
+<div id="clrSelectedPhoto" class="success hide">📷 Photo selected. अब नीचे <b>Read Uploaded Photo</b> दबाएँ।</div>
+  <div class="actions">
+    <button class="blue" id="clrReadPhotoBtn" type="button" onclick="clrReadPhoto()" style="display:block!important;font-size:17px;padding:14px 18px;">🔎 Read Uploaded Photo & Make Chart</button>
+    <button class="gray" type="button" onclick="clrRotatePhoto()">🔄 Rotate Photo</button>
+  </div>
+  <div id="clrOcrStatus" class="small"></div>
+  <canvas id="clrOcrCanvas" style="display:none"></canvas>
+</div>
+
+<div class="note">
+  <b>Reliable Rate Chart:</b> Photo OCR पर निर्भर नहीं। नीचे FAT 3.0–5.0 और CLR 25–30 का पूरा chart है।
+  हर cell में अपनी असली rate भरें, फिर Chart Save करें। बाद में Correction और Delete भी कर सकते हैं।
+</div>
+
+<div class="row3">
+  <div><label>Chart Name</label><input id="clrChartName" placeholder="जैसे Cow Rate Chart 1"></div>
+  <div><label>Farmer (optional)</label><select id="clrChartFarmer"></select></div>
+  <div><label>Copy Chart From</label><select id="clrCopyChart"><option value="">-- Select saved chart --</option></select></div>
+</div>
+
+<div class="actions">
+  <button class="blue" onclick="clrFillTemplate()">➕ 3.0–5.0 / CLR 25–30 Grid</button>
+  <button class="green" onclick="clrSaveChart()">💾 Save Chart</button>
+  <button class="gray" onclick="clrClearGrid()">Clear Rates</button>
+  <button class="red" onclick="clrDeleteChart()">🗑️ Delete Selected Chart</button>
+</div>
+
+<div class="note">
+  📷 ऊपर चुनी हुई photo को Read Uploaded Photo से chart में भरें। OCR के बाद हर value check/correct करके ही Save Chart करें।
+</div>
+
+<div class="clr-mobile-help">✏️ Rate भरने के लिए किसी भी सफेद box पर tap करें और value लिखें। Mobile में नीचे/side में scroll करके बाकी FAT columns भरें।</div>
+<div class="scroll">
+<table id="clrGrid"><thead id="clrHead"></thead><tbody id="clrBody"></tbody></table>
+</div>
+
+<h3>Saved Cow CLR Charts</h3>
+<div class="scroll"><table><thead><tr><th>Chart</th><th>Assigned Farmer</th><th>Rates</th><th>Action</th></tr></thead>
+<tbody id="clrSavedRows"></tbody></table></div>
+</section>
+
+
+<section id="settings" class="hide"><h2>⚙️ Settings</h2>
+<div class="row3"><div><label>Company Name</label><input id="setCompany" value="Shree Sendhav Dairy"></div><div><label>Address</label><input id="setAddress" value="Ashta, Dist. Sehore (M.P.)"></div><div><label>Mobile</label><input id="setMobile" value="9926502874"></div></div>
+<div class="row3"><div><label>Default Shift</label><select id="setShift"><option>Morning</option><option>Evening</option></select></div><div><label>Default Page</label><select id="setPage"><option>Dashboard</option><option>Milk Entry</option></select></div><div><label>Enter → Next Input</label><select id="setEnter"><option>ON</option><option>OFF</option></select></div></div>
+<div class="actions"><button class="green" onclick="saveSettings()">💾 Save Settings</button></div>
+</section>
+
+<section id="backup" class="hide"><h2>💾 Backup / Restore</h2>
+<div class="note">Backup file अपने computer/mobile में सुरक्षित रखें। Browser data clear होने पर backup से restore कर सकते हैं.</div>
+<div class="actions"><button class="green" onclick="downloadBackup()">⬇️ Full Data Backup</button><button class="blue" onclick="document.getElementById('restoreFile').click()">⬆️ Restore Backup</button><input id="restoreFile" type="file" accept=".json" style="display:none" onchange="restoreBackup(event)"><button class="red" onclick="clearAllData()">⚠️ Clear All Data</button></div>
+</section>
+
+<section id="whatsapp" class="hide"><h2>📱 WhatsApp / SMS</h2>
+<div class="note">Farmer का mobile number Farmer Master में save होना चाहिए.</div>
+<div class="row3"><div><label>Farmer</label><select id="wf" onchange="prepareMessage()"></select></div><div><label>Message Type</label><select id="wmtype" onchange="prepareMessage()"><option>10-Day Bill</option><option>Payment Received</option><option>Milk Summary</option><option>Morning Collection</option><option>Evening Collection</option></select></div><div><label>Message</label><textarea id="wmsg"></textarea></div></div>
+<h3>📅 Date + Shift Collection SMS</h3>
+<div class="row3"><div><label>Date</label><input id="smsDate" type="date"></div><div><label>Shift</label><select id="smsShift"><option>Morning</option><option>Evening</option></select></div><div><label>Report</label><button class="orange" style="width:100%" onclick="sendSelectedCollectionSMS()">📱 Send Collection SMS</button></div></div>
+<div class="actions"><button class="green" onclick="sendWhatsApp()">🟢 WhatsApp</button><button class="blue" onclick="sendSMS()">📱 SMS</button><button class="orange" onclick="sendCollectionSMS('Morning')">🌅 Today's Morning SMS</button><button class="orange" onclick="sendCollectionSMS('Evening')">🌆 Today's Evening SMS</button></div>
+<div class="card"><h3>Bulk Message Preparation</h3><p>नीचे सभी farmers के लिए अलग-अलग WhatsApp links बनाए जाएंगे.</p><button class="purple" onclick="bulkWhatsApp()">📱 Prepare Bulk WhatsApp Links</button><div id="bulkRows"></div></div>
+</section>
+<footer>Shree Sendhav Dairy V34 • Offline browser data • Backup regularly</footer>
+</main>
+
+<script>
+const K='SSD_DAIRY_V34';
+const defaultData={farmers:[],milk:[],purchases:[],payments:[],products:[
+{name:'Milk',rate:60,unit:'Litre'},{name:'Dahi',rate:80,unit:'Kg'},{name:'Ghee',rate:600,unit:'Kg'},{name:'Mawa',rate:320,unit:'Kg'},{name:'Paneer',rate:280,unit:'Kg'}],
+clr:[],clrCharts:[],settings:{company:'Shree Sendhav Dairy',address:'Ashta, Dist. Sehore (M.P.)',mobile:'9926502874',shift:'Morning',page:'Dashboard',enter:'ON'}};
+let D=JSON.parse(localStorage.getItem(K)||'null')||defaultData;
+
+/* V34 data migration: keep farmers/entries/products from the earlier V34 demo */
+(function migrateOldV34(){
+  try{
+    const oldF=JSON.parse(localStorage.getItem('ssd_v34_farmers')||'null');
+    const oldE=JSON.parse(localStorage.getItem('ssd_v34_entries')||'null');
+    const oldP=JSON.parse(localStorage.getItem('ssd_v34_products')||'null');
+
+    if(oldF && Array.isArray(oldF) && D.farmers.length===0){
+      D.farmers=oldF.map(f=>({
+        code:f.code||'', name:f.name||'', mobile:f.mobile||'', village:f.village||'',
+        cow:Number(f.crate||f.cow||0), buff:Number(f.brate||f.buff||0),
+        comm:Number(f.commission||f.comm||0), rateType:f.rateType||'Default'
+      })).filter(f=>f.code&&f.name);
+    }
+
+    if(oldE && Array.isArray(oldE) && D.milk.length===0){
+      D.milk=oldE.map(x=>({
+        date:x.date||T(), shift:x.shift||'Morning', farmer:x.code||x.farmer||'',
+        animal:x.animal||'Cow', milk:Number(x.milk)||0, fat:Number(x.fat)||0,
+        snf:Number(x.snf)||0, clr:Number(x.clr)||0, amount:Number(x.amount)||0
+      }));
+    }
+
+    if(oldP && Array.isArray(oldP) && D.purchases.length===0){
+      /* old demo products are catalog products, not farmer issue entries */
+      D.products=oldP.map(x=>({
+        name:x.name||x.product||'Other', rate:Number(x.rate)||0, unit:x.unit||'Kg'
+      }));
+    }
+    localStorage.setItem(K,JSON.stringify(D));
+  }catch(e){ console.log('V34 migration skipped',e); }
+})();
+const T=()=>new Date().toISOString().slice(0,10), M=n=>'₹'+(Number(n)||0).toFixed(2);
+const E=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+function save(){localStorage.setItem(K,JSON.stringify(D));refresh()}
+function show(id){document.querySelectorAll('section').forEach(x=>x.classList.add('hide'));document.getElementById(id).classList.remove('hide');refresh()}
+function opts(){renderChartSelects();['mf','pf','tf','bf','wf'].forEach(id=>{let s=document.getElementById(id);if(!s)return;let v=s.value;s.innerHTML='<option value="">Select Farmer</option>'+D.farmers.map(f=>`<option value="${E(f.code)}">${E(f.code)} - ${E(f.name)}</option>`).join('');if([...s.options].some(o=>o.value===v))s.value=v})}
+function saveFarmer(){let f={code:fc.value.trim(),name:fn.value.trim(),mobile:fm.value.trim(),village:fv.value.trim(),cow:+fcr.value||0,buff:+fbr.value||0,comm:+fcm.value||0,rateType:frt.value,cowChartId:(document.getElementById('fchart')?.value||'')};if(!f.code||!f.name)return alert('Farmer Code aur Name bhariye');let i=D.farmers.findIndex(x=>x.code===f.code);i<0?D.farmers.push(f):D.farmers[i]=f;save();clearFarmer();alert('Farmer Saved ✅')}
+function clearFarmer(){['fc','fn','fm','fv','fcr','fbr','fcm'].forEach(id=>document.getElementById(id).value='');frt.value='Default'}
+function editFarmer(i){let f=D.farmers[i];fc.value=f.code;fn.value=f.name;fm.value=f.mobile;fv.value=f.village;fcr.value=f.cow||'';fbr.value=f.buff||'';fcm.value=f.comm||0;frt.value=f.rateType||'Default';show('farmer')}
+function delFarmer(i){if(confirm('Delete Farmer?')){D.farmers.splice(i,1);save()}}
+function renderFarmers(){let q=(fs.value||'').toLowerCase();fr.innerHTML=D.farmers.map((f,i)=>({f,i})).filter(o=>(o.f.code+' '+o.f.name+' '+o.f.mobile).toLowerCase().includes(q)).map(o=>{let f=o.f,i=o.i;return `<tr><td>${E(f.code)}</td><td>${E(f.name)}</td><td>${E(f.mobile)}</td><td>${E(f.village)}</td><td>${M(f.cow)}</td><td>${M(f.buff)}</td><td>${M(f.comm)}</td><td>${E(f.rateType||'Default')}</td><td><button class="gray" onclick="editFarmer(${i})">Edit</button> <button class="red" onclick="delFarmer(${i})">Delete</button></td></tr>`}).join('')}
+function milkAmount(f,a,q,fat,snf,clr){
+ let gross=0;
+ if(a==='Cow'){
+   let rate=getCowRate(f,fat,clr);
+   gross=rate*q;
+   if(!rate) gross=((fat+snf)*340/100*q);
+ }else gross=(+f.buff||0)*fat*q;
+ return Math.max(0,gross-(+f.comm||0)*q)
+}
+function saveMilk(){let f=D.farmers.find(x=>x.code===mf.value),q=+ml.value||0,fa=+fat.value||0,s=+snf.value||0;if(!f||q<=0||fa<=0)return alert('Farmer, Milk aur FAT bhariye');D.milk.push({date:md.value||T(),shift:ms.value,time:mctime.value||new Date().toTimeString().slice(0,5),farmer:f.code,animal:ma.value,milk:q,fat:fa,snf:s,clr:+mclr.value||0,amount:milkAmount(f,ma.value,q,fa,s,+mclr.value||0)});save();alert('Milk Entry Saved ✅');clearMilk()}
+function clearMilk(){ml.value=fat.value=snf.value=mclr.value='';mctime.value=''}
+function editMilk(i){let x=D.milk[i];md.value=x.date;ms.value=x.shift;ma.value=x.animal;mf.value=x.farmer;ml.value=x.milk;fat.value=x.fat;snf.value=x.snf;mclr.value=x.clr||'';D.milk.splice(i,1);save();show('milk')}
+function delMilk(i){if(confirm('Milk entry delete kare?')){D.milk.splice(i,1);save()}}
+function renderMilk(){mr.innerHTML=D.milk.map((x,i)=>({x,i})).reverse().slice(0,150).map(o=>{let x=o.x,i=o.i;return `<tr><td>${x.date}</td><td>${x.shift}</td><td>${x.time||'-'}</td><td>${E(x.farmer)}</td><td>${x.animal}</td><td>${(+x.milk).toFixed(2)}</td><td>${(+x.fat).toFixed(2)}</td><td>${(+x.snf||0).toFixed(2)}</td><td>${(+x.clr||0).toFixed(1)}</td><td>${x.animal==='Cow'?'(FAT+SNF)×340/100':M((D.farmers.find(f=>f.code===x.farmer)||{}).buff||0)}</td><td>${M(x.amount)}</td><td><button class="gray" onclick="editMilk(${i})">Edit</button> <button class="red" onclick="delMilk(${i})">Delete</button></td></tr>`}).join('')}
+function calcPA(){pa.value=((+pq.value||0)*(+pr.value||0)).toFixed(2)}
+function updateProductUI(){pi.innerHTML=D.products.map(p=>`<option>${E(p.name)}</option>`).join('');let p=D.products.find(x=>x.name===pi.value);if(p&&!pr.value)pr.value=p.rate}
+function savePurchase(){if(!pf.value||!pa.value)return alert('Farmer aur Amount bhariye');D.purchases.push({date:pd.value||T(),farmer:pf.value,item:pi.value,qty:+pq.value||0,rate:+pr.value||0,amount:+pa.value,remark:premark.value});save();alert('Product Entry Saved ✅');pq.value=pr.value=pa.value=premark.value=''}
+function renderPurchases(){pur.innerHTML=D.purchases.map((x,i)=>({x,i})).reverse().slice(0,150).map(o=>{let x=o.x,i=o.i;return `<tr><td>${x.date}</td><td>${E(x.farmer)}</td><td>${E(x.item)}</td><td>${x.qty}</td><td>${M(x.rate)}</td><td>${M(x.amount)}</td><td>${E(x.remark)}</td><td><button class="red" onclick="delPurchase(${i})">Delete</button></td></tr>`}).join('')}
+function delPurchase(i){if(confirm('Product entry delete kare?')){D.purchases.splice(i,1);save()}}
+function paymentTypeUI(){let a=tt.value==='Advance Setup';advanceFields.style.display=a?'grid':'none';normalAmount.style.display=a?'none':'grid'}
+function savePayment(){let farmer=tf.value,type=tt.value,date=td.value||T();if(!farmer)return alert('Farmer chuniye');if(type==='Advance Setup'){let total=+ta.value||0,inst=+ti.value||0;if(total<=0||inst<=0)return alert('Total Advance aur Installment bhariye');D.payments.push({date,farmer,type,amount:total,installment:Math.min(inst,total),frequency:tif.value,remark:'Advance Setup'})}else{let amount=+tn.value||0;if(amount<=0)return alert('Amount bhariye');D.payments.push({date,farmer,type,amount,remark:tr.value})}save();alert('Payment Saved ✅');ta.value=ti.value=tn.value=tr.value=''}
+function renderPayments(){pay.innerHTML=D.payments.map((x,i)=>({x,i})).reverse().slice(0,150).map(o=>{let x=o.x,i=o.i;return `<tr><td>${x.date}</td><td>${E(x.farmer)}</td><td>${E(x.type)}</td><td>${M(x.amount)}</td><td>${x.installment?M(x.installment):'-'}</td><td>${x.frequency==='10day'?'10 Days':x.frequency==='monthly'?'Monthly':'-'}</td><td>${E(x.remark)}</td><td><button class="red" onclick="delPayment(${i})">Delete</button></td></tr>`}).join('')}
+function delPayment(i){if(confirm('Payment delete kare?')){D.payments.splice(i,1);save()}}
+function addDays(s,n){
+  const a=String(s||'').split('-').map(Number);
+  if(a.length!==3||!a[0]||!a[2]) return s;
+  const d=new Date(Date.UTC(a[0],a[1]-1,a[2]));
+  d.setUTCDate(d.getUTCDate()+Number(n||0));
+  return d.toISOString().slice(0,10);
+}
+function dateRange(start,end){
+  const out=[]; let cur=start, guard=0;
+  while(cur<=end && guard<370){
+    out.push(cur);
+    const next=addDays(cur,1);
+    if(next===cur) break;
+    cur=next; guard++;
+  }
+  return out;
+}
+function advanceForBill(c,s,e){let total=0,due=0;D.payments.filter(x=>x.farmer===c&&x.type==='Advance Setup'&&x.date<=e).forEach(a=>{total+=+a.amount||0;let inst=+a.installment||0,n=0,cur=a.date;while(cur<=e&&n<10000){if(cur>=s)due+=inst;n++;cur=a.frequency==='monthly'?monthAdd(a.date,n):addDays(a.date,n*10)}});let key='SSD_BILL_INST_'+c+'_'+s+'_'+e,saved=localStorage.getItem(key);if(saved!==null)due=Math.min(Math.max(0,+saved||0),total);return{total,due}}
+function monthAdd(s,n){let d=new Date(s+'T00:00:00'),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);d.setDate(Math.min(day,new Date(d.getFullYear(),d.getMonth()+1,0).getDate()));return d.toISOString().slice(0,10)}
+function applyInst(){
+ let farmer=document.getElementById('bf').value;
+ let start=document.getElementById('bs').value;
+ let end=document.getElementById('be').value;
+ let input=document.getElementById('billInst');
+ let amount=Number(input ? input.value : 0)||0;
+ if(!farmer||!start||!end)return alert('Farmer aur dates select karein');
+ let key='SSD_BILL_INST_'+farmer+'_'+start+'_'+end;
+ localStorage.setItem(key,String(amount));
+ bill();
+}
+
+function getEl(id){return document.getElementById(id)}
+function getFarmer(code){return D.farmers.find(f=>String(f.code)===String(code))}
+function safeDate(v){return v||T()}
+
+function bill(){
+ try{
+  const c=getEl('bf').value;
+  const s=getEl('bs').value;
+  const e=getEl('be').value;
+  const result=getEl('br');
+
+  if(!D.farmers || D.farmers.length===0){
+   result.innerHTML='<div class="danger"><b>Farmer data नहीं मिला.</b><br>Farmer Master में farmer save करें.</div>';
+   return;
+  }
+  if(!c){
+   result.innerHTML='<div class="note">ऊपर Farmer में किसान चुनें, फिर <b>Generate Bill</b> दबाएँ.</div>';
+   return;
+  }
+  if(!s||!e){
+   result.innerHTML='<div class="danger">Start Date और End Date चुनें.</div>';
+   return;
+  }
+  if(e<s){
+   result.innerHTML='<div class="danger">End Date, Start Date से पहले नहीं हो सकती.</div>';
+   return;
+  }
+
+  const f=getFarmer(c);
+  if(!f){
+   result.innerHTML='<div class="danger">Selected Farmer नहीं मिला. Page refresh करके फिर Farmer चुनें.</div>';
+   return;
+  }
+
+  const milk=D.milk.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+  const purchases=D.purchases.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+  const payments=D.payments.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+
+  const milkAmount=milk.reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const productAmount=purchases.reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const running=payments.filter(x=>x.type==='Running Payment').reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const addition=payments.filter(x=>x.type==='AD (Addition)').reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const cut=payments.filter(x=>x.type==='Cut-off (Deduction)').reduce((a,x)=>a+(Number(x.amount)||0),0);
+  const adv=advanceForBill(c,s,e);
+  const installment=Number(adv.due)||0;
+
+  const totalMilk=milk.reduce((a,x)=>a+(Number(x.milk)||0),0);
+  const fatKg=milk.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+  const avgFat=totalMilk ? fatKg*100/totalMilk : 0;
+  const net=milkAmount-productAmount+addition-cut-installment-running;
+  const advanceRemaining=Math.max(0,(Number(adv.total)||0)-installment);
+
+  let rows='';
+  dateRange(s,e).forEach(cursor=>{
+   const day=milk.filter(x=>String(x.date)===String(cursor));
+   const morning=day.filter(x=>x.shift==='Morning').reduce((a,x)=>a+(Number(x.milk)||0),0);
+   const evening=day.filter(x=>x.shift==='Evening').reduce((a,x)=>a+(Number(x.milk)||0),0);
+   const dayFat=day.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+   rows+=`<tr><td>${E(cursor)}</td><td>${morning.toFixed(2)}</td><td>${evening.toFixed(2)}</td><td>${(morning+evening).toFixed(2)}</td><td>${dayFat.toFixed(3)}</td></tr>`;
+  });
+
+  const key='SSD_BILL_INST_'+c+'_'+s+'_'+e;
+  const saved=localStorage.getItem(key);
+  const shownInstallment=saved!==null?saved:installment;
+
+  result.innerHTML=`<div class="bill">
+   <h1>${E(D.settings.company)}</h1>
+   <div class="sub">MILK PURCHASE BILL • FARMER 10-DAY BILL</div>
+   <p><b>Farmer Code:</b> ${E(c)} &nbsp; <b>Name:</b> ${E(f.name)} &nbsp; <b>Mobile:</b> ${E(f.mobile||'')}</p>
+   <p><b>Period:</b> ${E(s)} to ${E(e)} &nbsp; <b>Village:</b> ${E(f.village||'')}</p>
+   <table><thead><tr><th>Date</th><th>Morning L</th><th>Evening L</th><th>Total L</th><th>FAT KG</th></tr></thead>
+   <tbody>${rows}</tbody></table>
+   <div class="summary">
+    <p>Total Milk: <b>${totalMilk.toFixed(2)} L</b> &nbsp; Average FAT: <b>${avgFat.toFixed(2)}</b> &nbsp; FAT KG: <b>${fatKg.toFixed(3)}</b></p>
+    <p>Milk Amount: <b>${M(milkAmount)}</b></p>
+    <p>Farmer Product Issue (-): <b>${M(productAmount)}</b></p>
+    <p>AD (+): <b>${M(addition)}</b></p>
+    <p>Cut-off (-): <b>${M(cut)}</b></p>
+    <p>Advance Installment (-): <b>${M(installment)}</b></p>
+    <p>Running Payment (-): <b>${M(running)}</b></p>
+    <p>Advance Remaining: <b>${M(advanceRemaining)}</b></p>
+    <hr><div class="balance">NET / FINAL BALANCE: ${M(net)}</div>
+   </div>
+   <div class="no-print actions">
+    <input id="billInst" type="number" value="${E(shownInstallment)}" placeholder="Installment">
+    <button class="green" id="saveBillInstBtn">Installment Save</button>
+    <button class="blue" id="billWaBtn">📱 WhatsApp Bill</button>
+    <button class="blue" id="billSmsBtn">📱 SMS Bill</button>
+   </div>
+  </div>`;
+
+  getEl('saveBillInstBtn').addEventListener('click',applyInst);
+  getEl('billWaBtn').addEventListener('click',sendBillWhatsApp);
+  getEl('billSmsBtn').addEventListener('click',sendBillSMS);
+ }catch(err){
+  console.error(err);
+  getEl('br').innerHTML='<div class="danger"><b>Bill में error आया.</b><br>कृपया page refresh करके दोबारा कोशिश करें.</div>';
+ }
+}
+
+function sendBillText(){
+ const c=getEl('bf').value,s=getEl('bs').value,e=getEl('be').value,f=getFarmer(c);
+ if(!f)return '';
+ const ms=D.milk.filter(x=>String(x.farmer)===String(c)&&x.date>=s&&x.date<=e);
+ const milk=ms.reduce((a,x)=>a+(Number(x.milk)||0),0);
+ const kg=ms.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+ const amt=ms.reduce((a,x)=>a+(Number(x.amount)||0),0);
+ return `Shree Sendhav Dairy 10-Day Bill
+Farmer: ${f.name} (${c})
+Period: ${s} to ${e}
+Milk: ${milk.toFixed(2)} L
+FAT KG: ${kg.toFixed(3)}
+Milk Amount: ${M(amt)}
+Thank you.`;
+}
+function sendBillWhatsApp(){
+ const f=getFarmer(getEl('bf').value),m=String(f?.mobile||'').replace(/\D/g,'');
+ if(m.length<10)return alert('Farmer का 10 digit mobile number Farmer Master में save करें');
+ window.location.href='https://wa.me/91'+m+'?text='+encodeURIComponent(sendBillText());
+}
+function sendBillSMS(){
+ const f=getFarmer(getEl('bf').value),m=String(f?.mobile||'').replace(/\D/g,'');
+ if(m.length<10)return alert('Farmer का 10 digit mobile number Farmer Master में save करें');
+ window.location.href='sms:'+m+'?body='+encodeURIComponent(sendBillText());
+}
+
+function renderReport(){
+ try{
+  const rs=getEl('rs'),re=getEl('re'),rshift=getEl('rshift');
+  const s=rs.value||T(), e=re.value||T(), sh=rshift.value;
+  const dates=dateRange(s,e);
+  let rows='',tm=0,tfat=0,ta=0,mo=0,ev=0;
+  dates.forEach(cursor=>{
+    const a=D.milk.filter(x=>String(x.date)===String(cursor)&&(sh==='All'||x.shift===sh));
+    const m=a.filter(x=>x.shift==='Morning').reduce((z,x)=>z+(Number(x.milk)||0),0);
+    const v=a.filter(x=>x.shift==='Evening').reduce((z,x)=>z+(Number(x.milk)||0),0);
+    const milk=a.reduce((z,x)=>z+(Number(x.milk)||0),0);
+    const kg=a.reduce((z,x)=>z+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0);
+    const amt=a.reduce((z,x)=>z+(Number(x.amount)||0),0);
+    const avg=milk?kg*100/milk:0;
+    mo+=m; ev+=v; tm+=milk; tfat+=kg; ta+=amt;
+    rows+=`<tr><td>${E(cursor)}</td><td>${m.toFixed(2)}</td><td>${v.toFixed(2)}</td><td>${milk.toFixed(2)}</td><td>${kg.toFixed(3)}</td><td>${avg.toFixed(2)}</td><td>${M(amt)}</td></tr>`;
+  });
+  if(!dates.length){
+    rows='<tr><td colspan="7">Start Date और End Date सही चुनें.</td></tr>';
+  }
+  getEl('reportRows').innerHTML=rows;
+  getEl('reportStats').innerHTML=`<div>Morning<b>${mo.toFixed(2)} L</b></div><div>Evening<b>${ev.toFixed(2)} L</b></div><div>Total Milk<b>${tm.toFixed(2)} L</b></div><div>Total FAT KG<b>${tfat.toFixed(3)}</b></div><div>Average FAT<b>${tm?(tfat*100/tm).toFixed(2):'0.00'}</b></div><div>Total Amount<b>${M(ta)}</b></div>`;
+ }catch(err){
+  console.error(err);
+  getEl('reportRows').innerHTML='<tr><td colspan="7">Report में error आया. Page refresh करें.</td></tr>';
+ }
+}
+function exportCSV(){let rows=[['Date','Shift','Farmer','Animal','Milk','FAT','SNF','CLR','Amount'],...D.milk.map(x=>[x.date,x.shift,x.farmer,x.animal,x.milk,x.fat,x.snf,x.clr,x.amount])];let csv=rows.map(r=>r.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='Shree_Sendhav_Milk_Report.csv';a.click()}
+function saveProduct(){let n=prodName.value.trim(),r=+prodRate.value||0,u=prodUnit.value;if(!n)return alert('Product name bhariye');let i=D.products.findIndex(p=>p.name.toLowerCase()===n.toLowerCase());i<0?D.products.push({name:n,rate:r,unit:u}):D.products[i]={name:n,rate:r,unit:u};save();prodName.value=prodRate.value='';renderProducts();updateProductUI()}
+function delProduct(i){D.products.splice(i,1);save()}
+function renderProducts(){prodRows.innerHTML=D.products.map((p,i)=>`<tr><td>${E(p.name)}</td><td>${M(p.rate)}</td><td>${E(p.unit)}</td><td><button class="red" onclick="delProduct(${i})">Delete</button></td></tr>`).join('')}
+function ensureCharts(){
+  if(!Array.isArray(D.clrCharts)) D.clrCharts=[];
+  if(D.clrCharts.length===0 && Array.isArray(D.clr) && D.clr.length){
+    D.clrCharts=[{id:'chart_default',name:'Default Chart',rows:D.clr.map(x=>({fat:+x.fat||0,clr:+x.clr||0,rate:+x.rate||0}))}];
+  }
+  D.farmers.forEach(f=>{if(f.cowChartId && !D.clrCharts.some(c=>c.id===f.cowChartId)) f.cowChartId='chart_default'});
+}
+function renderChartSelects(){
+  ensureCharts();
+  const cs=document.getElementById('chartSelect'), fs=document.getElementById('fchart');
+  if(cs){let old=cs.value;cs.innerHTML=D.clrCharts.map(c=>`<option value="${E(c.id)}">${E(c.name)}</option>`).join('');if([...cs.options].some(o=>o.value===old))cs.value=old;}
+  if(fs){let old=fs.value;fs.innerHTML='<option value="">Default Chart</option>'+D.clrCharts.map(c=>`<option value="${E(c.id)}">${E(c.name)}</option>`).join('');if([...fs.options].some(o=>o.value===old))fs.value=old;}
+}
+function currentChart(){
+  ensureCharts(); let id=document.getElementById('chartSelect')?.value;
+  return D.clrCharts.find(c=>c.id===id)||D.clrCharts[0]||null;
+}
+function loadChart(){
+  const c=currentChart(); if(!c)return;
+  const n=document.getElementById('chartName'); if(n)n.value=c.name;
+  D.clr=c.rows.map(x=>({...x}));
+  renderCLR();
+}
+function saveChart(){
+  ensureCharts();
+  const n=(document.getElementById('chartName')?.value||'').trim()||('Chart '+(D.clrCharts.length+1));
+  const rows=D.clr.map(x=>({fat:+x.fat||0,clr:+x.clr||0,rate:+x.rate||0})).filter(x=>x.fat>=3&&x.fat<=5&&x.rate>0);
+  let id=document.getElementById('chartSelect')?.value;
+  let c=D.clrCharts.find(x=>x.id===id);
+  if(!c){id='chart_'+Date.now();c={id,name:n,rows:[]};D.clrCharts.push(c);document.getElementById('chartSelect').value=id;}
+  c.name=n;c.rows=rows;D.clr=rows.map(x=>({...x}));save();renderChartSelects();
+  if(document.getElementById('chartSelect'))document.getElementById('chartSelect').value=id;
+  alert(`"${n}" chart saved ✅`);
+}
+function deleteChart(){
+  ensureCharts(); const id=document.getElementById('chartSelect')?.value;
+  if(!id)return;
+  if(D.clrCharts.length<=1)return alert('कम से कम 1 rate chart रखें।');
+  const c=D.clrCharts.find(x=>x.id===id); if(!c)return;
+  if(!confirm(`"${c.name}" delete करें?`))return;
+  D.clrCharts=D.clrCharts.filter(x=>x.id!==id);
+  D.farmers.forEach(f=>{if(f.cowChartId===id)f.cowChartId='';});
+  save();renderChartSelects();loadChart();
+}
+function getCowRate(f,fat,clr){
+  // 1) Use the new farmer-wise photo/manual chart store first.
+  // This is the chart saved from Cow CLR Rate List.
+  try{
+    const saved=JSON.parse(localStorage.getItem('SSD_V34_COW_CLR_CHARTS')||'[]')||[];
+    const exact=saved.find(c=>String(c.farmerCode||'')===String(f?.code||''));
+    const common=saved.find(c=>!c.farmerCode);
+    const chart=exact||common;
+    if(chart){
+      const fv=Number(fat).toFixed(1);
+      const cv=String(Math.round(Number(clr)));
+      const v=chart.values?.[cv]?.[fv];
+      if(v!=='' && v!=null && Number(v)>0) return Number(v);
+    }
+  }catch(e){}
+
+  // 2) Keep compatibility with the older V34 chart system.
+  ensureCharts();
+  const chartId=f?.cowChartId||'chart_default';
+  const chart=D.clrCharts.find(c=>c.id===chartId)||D.clrCharts[0];
+  if(!chart)return 0;
+  const rows=chart.rows||[];
+  let r=rows.find(x=>Math.abs(+x.fat-fat)<0.001 && Math.abs((+x.clr||0)-(+clr||0))<0.001);
+  if(!r) r=rows.find(x=>Math.abs(+x.fat-fat)<0.001);
+  if(!r && rows.length) r=rows.reduce((a,x)=>Math.abs(x.fat-fat)+Math.abs((x.clr||0)-clr)/100 < Math.abs(a.fat-fat)+Math.abs((a.clr||0)-clr)/100 ? x:a);
+  return +(r?.rate||0);
+}
+function saveCLR(){let fat=+document.getElementById('clrFat').value,clr=+document.getElementById('clrValue').value,rate=+document.getElementById('clrRate').value;if(!fat||!rate)return alert('FAT aur Rate bhariye');D.clr.push({fat,clr,rate});D.clr.sort((a,b)=>a.fat-b.fat||a.clr-b.clr);save();renderCLR();document.getElementById('clrFat').value='';document.getElementById('clrValue').value='';document.getElementById('clrRate').value=''}
+function addCLRRange(){let base=+prompt('Starting CLR?','25');let rate=+prompt('Rate for FAT 3.0?','30');if(!rate)return;for(let f=3.0;f<=5.001;f+=.1)D.clr.push({fat:+f.toFixed(1),clr:base,rate:+(rate+(f-3.0)*2).toFixed(2)});save();renderCLR()}
+function editCLR(i){let x=D.clr[i];let fat=prompt('FAT',x.fat);if(fat===null)return;let clr=prompt('CLR',x.clr??'');if(clr===null)return;let rate=prompt('Rate ₹/L',x.rate);if(rate===null)return;D.clr[i]={fat:Number(fat),clr:Number(clr),rate:Number(rate)};D.clr.sort((a,b)=>a.fat-b.fat||a.clr-b.clr);save();renderCLR()}
+function deleteCLR(i){if(confirm('इस rate को delete करें?')){D.clr.splice(i,1);save();renderCLR()}}
+function renderCLR(){let el=document.getElementById('clrRows');if(!el)return;el.innerHTML=D.clr.map((x,i)=>`<tr><td>${Number(x.fat).toFixed(1)}</td><td>${x.clr??'-'}</td><td>${M(x.rate)}</td><td><button class="blue" onclick="editCLR(${i})">✏️ Correction</button> <button class="red" onclick="deleteCLR(${i})">🗑️ Delete</button></td></tr>`).join('')}
+function previewCLRFile(ev){let f=ev.target.files&&ev.target.files[0],box=document.getElementById('clrPreview');if(!f||!box)return;let u=URL.createObjectURL(f);if(f.type.startsWith('image/'))box.innerHTML=`<img src="${u}" style="max-width:100%;max-height:420px;border:1px solid #ccd;border-radius:8px"><div>${f.name}</div>`;else box.innerHTML=`<iframe src="${u}" style="width:100%;height:420px;border:1px solid #ccd;border-radius:8px"></iframe><div>${f.name}</div>`}
+function clearCLRFile(){let i=document.getElementById('clrFile'),b=document.getElementById('clrPreview');if(i)i.value='';if(b)b.innerHTML=''}
+async function readCLRPhoto(){
+ let i=document.getElementById('clrFile'),f=i&&i.files&&i.files[0];
+ if(!f)return alert('पहले rate chart photo/PDF upload करें।');
+ if(!f.type.startsWith('image/'))return alert('अभी JPG/PNG photo पर chart OCR करें। PDF को पहले image में बदलकर upload करें।');
+ if(typeof Tesseract==='undefined'){
+   let sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+   sc.onload=()=>readCLRPhoto();sc.onerror=()=>alert('OCR library load नहीं हुई। Internet चालू करके फिर try करें।');
+   document.head.appendChild(sc);return;
+ }
+ alert('Rate chart को table-cell के हिसाब से पढ़ा जा रहा है। कृपया 20-40 seconds wait करें...');
+ try{
+   const src=await new Promise((resolve,reject)=>{
+     const u=URL.createObjectURL(f),im=new Image();
+     im.onload=()=>{URL.revokeObjectURL(u);resolve(im)};im.onerror=reject;im.src=u;
+   });
+   const base=document.createElement('canvas'),bc=base.getContext('2d');
+   let w=src.naturalWidth||src.width,h=src.naturalHeight||src.height;
+   // Normalize to landscape reading direction. This handles the common sideways photo.
+   let rot=0;
+   if(h>w*1.08) rot=Math.PI/2;
+   else if(w>h*1.08 && false) rot=0;
+   const scale=Math.min(2.6,Math.max(1.8,2400/Math.max(w,h)));
+   if(rot){base.width=Math.round(h*scale);base.height=Math.round(w*scale);bc.translate(base.width,0);bc.rotate(rot);}
+   else {base.width=Math.round(w*scale);base.height=Math.round(h*scale);}
+   bc.drawImage(src,0,0,w*scale,h*scale);
+
+   // Find the rectangular rate table from continuous dark grid lines.
+   const W=base.width,H=base.height,im=bc.getImageData(0,0,W,H),d=im.data;
+   const dark=Array.from({length:H},()=>0), darkX=new Int32Array(W);
+   for(let y=0;y<H;y++){
+     let n=0;
+     for(let x=0;x<W;x++){
+       const k=(y*W+x)*4,g=.299*d[k]+.587*d[k+1]+.114*d[k+2];
+       if(g<145){n++;darkX[x]++;}
+     }
+     dark[y]=n;
+   }
+   function runs(vals,threshold){
+     const out=[];let st=-1;
+     for(let k=0;k<vals.length;k++){
+       if(vals[k]>=threshold){if(st<0)st=k;}
+       else if(st>=0){if(k-st>=2)out.push([st,k-1]);st=-1;}
+     }
+     if(st>=0&&vals.length-st>=2)out.push([st,vals.length-1]);
+     return out;
+   }
+   // Table borders are long continuous lines. Merge nearby peaks caused by anti-aliasing.
+   let vr=runs(darkX,Math.max(18,Math.floor(H*.30)));
+   let hr=runs(dark,Math.max(35,Math.floor(W*.30)));
+   function centers(rs){return rs.map(r=>Math.round((r[0]+r[1])/2));}
+   function mergeClose(a,gap){let o=[];for(const v of a){if(!o.length||v-o[o.length-1]>gap)o.push(v);else o[o.length-1]=Math.round((o[o.length-1]+v)/2)}return o;}
+   let vx=mergeClose(centers(vr),Math.max(3,Math.round(W*.006)));
+   let hy=mergeClose(centers(hr),Math.max(3,Math.round(H*.006)));
+
+   // If line detection misses some grid lines, use the table's dominant central area and uniform grid.
+   // We expect 22 vertical boundaries (CLR + 21 FAT columns) and 8 horizontal boundaries
+   // (header + 6 CLR rows + bottom). Select the strongest/most evenly spaced candidates.
+   function chooseGrid(vals,count,minGap,maxGap){
+     if(vals.length===count)return vals;
+     if(vals.length>count){
+       // Keep candidates with good spacing, starting with the outermost pair.
+       let best=null,bscore=-1e99;
+       for(let start=0;start<vals.length;start++){
+         for(let end=start+count-1;end<vals.length;end++){
+           const span=vals[end]-vals[start], step=span/(count-1);
+           if(step<minGap||step>maxGap)continue;
+           let score=0;
+           for(let j=0;j<count;j++){const target=vals[start]+j*step;let md=1e9;for(const q of vals){md=Math.min(md,Math.abs(q-target))}score-=md;}
+           if(score>bscore){bscore=score;best=[vals[start],vals[end],step]}
+         }
+       }
+       if(best){let out=[];for(let j=0;j<count;j++)out.push(Math.round(best[0]+j*best[2]));return out;}
+     }
+     return null;
+   }
+   vx=chooseGrid(vx,22,W*.025,W*.12);
+   hy=chooseGrid(hy,8,H*.05,H*.25);
+   if(!vx||!hy){
+     return alert('Chart की grid lines detect नहीं हुईं। कृपया पूरी table की सीधी, साफ और बिना कटे हुए photo upload करें।');
+   }
+
+   // Each rate cell is OCR'd separately. FAT and CLR labels are known from this chart format,
+   // so OCR only has to recognize the numeric rate in each cell.
+   const fats=Array.from({length:21},(_,k)=>(3+k*.1).toFixed(1));
+   const clrs=[25,26,27,28,29,30];
+   let rows=[];
+   for(let ri=0;ri<6;ri++){
+     for(let ci=0;ci<21;ci++){
+       const x0=vx[ci+1]+Math.max(2,Math.round((vx[ci+2]-vx[ci+1])*.08));
+       const x1=vx[ci+2]-Math.max(2,Math.round((vx[ci+2]-vx[ci+1])*.08));
+       const y0=hy[ri+2]+Math.max(2,Math.round((hy[ri+3]-hy[ri+2])*.12));
+       const y1=hy[ri+3]-Math.max(2,Math.round((hy[ri+3]-hy[ri+2])*.12));
+       if(x1<=x0||y1<=y0)continue;
+       const cell=document.createElement('canvas');cell.width=Math.max(80,x1-x0);cell.height=Math.max(45,y1-y0);
+       const cc=cell.getContext('2d');cc.drawImage(base,x0,y0,x1-x0,y1-y0,0,0,cell.width,cell.height);
+       const ciData=cc.getImageData(0,0,cell.width,cell.height),cd=ciData.data;
+       for(let p=0;p<cd.length;p+=4){const g=.299*cd[p]+.587*cd[p+1]+.114*cd[p+2];const v=g<175?0:255;cd[p]=cd[p+1]=cd[p+2]=v;}
+       cc.putImageData(ciData,0,0);
+       let rr=await Tesseract.recognize(cell,'eng',{logger:()=>{},tessedit_pageseg_mode:'10',tessedit_char_whitelist:'0123456789.'});
+       let txt=(rr.data.text||'').replace(/,/g,'.');
+       let nums=(txt.match(/\d+(?:\.\d+)?/g)||[]).map(Number).filter(n=>n>20&&n<60);
+       // Retry with a slightly different segmentation if the first pass fails.
+       if(!nums.length){rr=await Tesseract.recognize(cell,'eng',{logger:()=>{},tessedit_pageseg_mode:'7',tessedit_char_whitelist:'0123456789.'});txt=(rr.data.text||'').replace(/,/g,'.');nums=(txt.match(/\d+(?:\.\d+)?/g)||[]).map(Number).filter(n=>n>20&&n<60);}
+       if(nums.length){rows.push({fat:Number(fats[ci]),clr:clrs[ri],rate:+nums[0].toFixed(2)});}
+     }
+   }
+   if(rows.length<80){
+     return alert(rows.length+' rate cells read हुईं। पूरी table reliably नहीं पढ़ी गई। Photo को सीधा, पूरा और साफ करके फिर try करें। गलत values को बाद में Correction किया जा सकता है।');
+   }
+   D.clr=rows;save();renderCLR();
+   alert(rows.length+' rate cells add हुईं। अब Correction करके values check करें, फिर Save Chart दबाएँ।');
+ }catch(e){console.error(e);alert('Photo read नहीं हो पाई। साफ और सीधी chart photo लगाकर फिर try करें।');}
+}
+
+function saveSettings(){D.settings={company:setCompany.value,address:setAddress.value,mobile:setMobile.value,shift:setShift.value,page:setPage.value,enter:setEnter.value};save();alert('Settings Saved ✅')}
+function loadSettings(){setCompany.value=D.settings.company;setAddress.value=D.settings.address;setMobile.value=D.settings.mobile;setShift.value=D.settings.shift;setPage.value=D.settings.page;setEnter.value=D.settings.enter}
+function downloadBackup(){let o={version:'V34',created:new Date().toISOString(),data:D};let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,2)],{type:'application/json'}));a.download='Shree_Sendhav_Dairy_V34_Backup_'+T()+'.json';a.click()}
+function restoreBackup(ev){let f=ev.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let o=JSON.parse(r.result);if(!o.data||!o.data.farmers)throw 0;D=o.data;save();loadSettings();alert('Backup Restore ho gaya ✅')}catch(e){alert('Invalid backup file')}};r.readAsText(f)}
+function clearAllData(){if(confirm('सारा local data delete होगा. Continue?')){localStorage.removeItem(K);location.reload()}}
+function collectionMessageFor(f,shift,date){
+  let ms=D.milk.filter(x=>x.farmer===f.code&&x.date===date&&x.shift===shift);
+  if(!ms.length)return `Shree Sendhav Dairy: ${f.name}, ${date} की ${shift} collection entry नहीं मिली.`;
+  let milk=ms.reduce((a,x)=>a+(Number(x.milk)||0),0),amt=ms.reduce((a,x)=>a+(Number(x.amount)||0),0),kg=ms.reduce((a,x)=>a+(Number(x.milk)||0)*(Number(x.fat)||0)/100,0),times=ms.map(x=>x.time||'-').join(', ');
+  return `Shree Sendhav Dairy
+Farmer: ${f.name}
+Date: ${date}
+${shift} Collection
+Time: ${times}
+Milk: ${milk.toFixed(2)} L
+FAT KG: ${kg.toFixed(3)}
+Amount: ${M(amt)}
+Thank you.`}
+function collectionMessage(f,shift){return collectionMessageFor(f,shift,T())}
+function prepareMessage(){let f=D.farmers.find(x=>x.code===wf.value);if(!f){wmsg.value='';return}let t=wmtype.value;wmsg.value=t==='Payment Received'?`Shree Sendhav Dairy: Payment received. Thank you ${f.name}.`:t==='Milk Summary'?`Shree Sendhav Dairy: Dear ${f.name}, your milk entries are recorded. Thank you.`:t==='Morning Collection'?collectionMessage(f,'Morning'):t==='Evening Collection'?collectionMessage(f,'Evening'):sendFarmerBillText(f)}
+function sendCollectionSMS(shift){let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');if(!m)return alert('Farmer select karein aur mobile number save karein');location.href='sms:'+m+'?body='+encodeURIComponent(collectionMessage(f,shift))}
+function sendSelectedCollectionSMS(){
+  let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');
+  let date=document.getElementById('smsDate')?.value||T(),shift=document.getElementById('smsShift')?.value||'Morning';
+  if(!f)return alert('Farmer select karein');
+  if(!m)return alert('Farmer ka mobile number save karein');
+  location.href='sms:'+m+'?body='+encodeURIComponent(collectionMessageFor(f,shift,date));
+}
+function sendFarmerBillText(f){let end=T(),start=addDays(end,-9),ms=D.milk.filter(x=>x.farmer===f.code&&x.date>=start&&x.date<=end),milk=ms.reduce((a,x)=>a+x.milk,0),amt=ms.reduce((a,x)=>a+x.amount,0);return `Shree Sendhav Dairy - 10 Day Summary\nFarmer: ${f.name}\nPeriod: ${start} to ${end}\nMilk: ${milk.toFixed(2)} L\nAmount: ${M(amt)}`}
+function sendWhatsApp(){let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');if(!m)return alert('Mobile number saved nahi hai');location.href='https://wa.me/91'+m+'?text='+encodeURIComponent(wmsg.value)}
+function sendSMS(){let f=D.farmers.find(x=>x.code===wf.value),m=(f?.mobile||'').replace(/\D/g,'');if(!m)return alert('Mobile number saved nahi hai');location.href='sms:'+m+'?body='+encodeURIComponent(wmsg.value)}
+function bulkWhatsApp(){let out=D.farmers.filter(f=>f.mobile).map(f=>`<p><b>${E(f.code)} - ${E(f.name)}</b> <a href="https://wa.me/91${String(f.mobile).replace(/\D/g,'')}?text=${encodeURIComponent(sendFarmerBillText(f))}" target="_blank">Open WhatsApp</a></p>`).join('');bulkRows.innerHTML=out||'<p>No mobile numbers saved.</p>'}
+function refresh(){opts();renderFarmers();renderMilk();renderPurchases();renderPayments();renderProducts();ensureCharts();renderChartSelects();if(document.getElementById('chartSelect')&&D.clrCharts.length&&!document.getElementById('chartSelect').value)document.getElementById('chartSelect').value=D.clrCharts[0].id;renderCLR();updateProductUI();let x=D.milk.filter(a=>a.date===T()),ded=D.purchases.filter(a=>a.date===T()).reduce((z,a)=>z+a.amount,0)+D.payments.filter(a=>a.date===T()&&(a.type==='Cut-off (Deduction)'||a.type==='Running Payment')).reduce((z,a)=>z+a.amount,0),amt=x.reduce((a,z)=>a+z.amount,0);df.textContent=D.farmers.length;dm.textContent=x.reduce((a,z)=>a+z.milk,0).toFixed(2)+' L';dkg.textContent=x.reduce((a,z)=>a+z.milk*z.fat/100,0).toFixed(3);da.textContent=M(amt);dd.textContent=M(ded);dn.textContent=M(amt-ded);dmo.textContent=x.filter(a=>a.shift==='Morning').reduce((a,z)=>a+z.milk,0).toFixed(2)+' L';dev.textContent=x.filter(a=>a.shift==='Evening').reduce((a,z)=>a+z.milk,0).toFixed(2)+' L';dashSummary.innerHTML=`Morning ${document.getElementById('dmo').textContent} • Evening ${document.getElementById('dev').textContent}`;loadSettings()}
+function backupCurrentBill(){if(!bf.value||!bs.value||!be.value)return alert('Farmer aur dates select karein');let c=bf.value,s=bs.value,e=be.value,ms=D.milk.filter(x=>x.farmer===c&&x.date>=s&&x.date<=e),f=D.farmers.find(x=>x.code===c),arr=JSON.parse(localStorage.getItem('SSD_SAVED_BILLS')||'[]');arr=arr.filter(x=>!(x.farmer===c&&x.start===s&&x.end===e));arr.push({id:Date.now(),farmer:c,name:f?.name||c,start:s,end:e,milk:ms.reduce((a,x)=>a+x.milk,0),amount:ms.reduce((a,x)=>a+x.amount,0)});localStorage.setItem('SSD_SAVED_BILLS',JSON.stringify(arr));alert('Bill saved ✅')}
+document.getElementById('pf').addEventListener('change',()=>{let f=D.farmers.find(x=>x.code===pf.value);pfName.textContent=f?'Farmer Name: '+f.name:''});
+document.getElementById('pi').addEventListener('change',()=>{let p=D.products.find(x=>x.name===pi.value);if(p)pr.value=p.rate});
+document.getElementById('md').value=T();document.getElementById('pd').value=T();document.getElementById('td').value=T();document.getElementById('smsDate').value=T();let z=new Date();z.setDate(z.getDate()-9);document.getElementById('bs').value=z.toISOString().slice(0,10);document.getElementById('be').value=T();document.getElementById('rs').value=document.getElementById('bs').value;document.getElementById('re').value=T();
+if(document.getElementById('smsDate')) document.getElementById('smsDate').value=T();
+refresh();paymentTypeUI();
+getEl('bf').addEventListener('change',bill);
+getEl('bs').addEventListener('change',bill);
+getEl('be').addEventListener('change',bill);
+getEl('rshift').addEventListener('change',renderReport);
+getEl('rs').addEventListener('change',renderReport);
+getEl('re').addEventListener('change',renderReport);
+
+</script>
+
+<script>
+(function(){
+  const FATS = Array.from({length:21}, (_,i)=>(3+i/10).toFixed(1));
+  const CLRS = [25,26,27,28,29,30];
+  const KEY = 'SSD_V34_COW_CLR_CHARTS';
+  const ASSIGN_KEY = 'SSD_V34_FARMER_CLR_ASSIGN';
+
+  function qs(id){ return document.getElementById(id); }
+  function farmers(){
+    try{
+      const keys=['SSD_DAIRY_V34','ssd_v34_farmers'];
+      for(const k of keys){
+        const d=JSON.parse(localStorage.getItem(k)||'null');
+        if(Array.isArray(d)) return d;
+        if(d && Array.isArray(d.farmers)) return d.farmers;
+      }
+    }catch(e){}
+    return [];
+  }
+  function getCharts(){ try{return JSON.parse(localStorage.getItem(KEY)||'[]')||[]}catch(e){return [];} }
+  function setCharts(a){ localStorage.setItem(KEY, JSON.stringify(a)); }
+  function farmerLabel(f){ return (f.code||f.id||'')+' - '+(f.name||f.farmerName||'Farmer'); }
+
+  function buildGrid(values){
+    const head=qs('clrHead'), body=qs('clrBody');
+    if(!head||!body)return;
+    head.innerHTML='<tr><th>CLR</th>'+FATS.map(f=>'<th>'+f+'</th>').join('')+'</tr>';
+    body.innerHTML=CLRS.map(clr=>{
+      const row=values?.[clr]||{};
+      return '<tr><th>'+clr+'</th>'+FATS.map(f=>{
+        const v=row[f] ?? '';
+        return '<td><input class="clrCell" data-clr="'+clr+'" data-fat="'+f+'" type="number" step="0.01" inputmode="decimal" value="'+String(v).replace(/"/g,'&quot;')+'" placeholder="Rate"></td>';
+      }).join('')+'</tr>';
+    }).join('');
+  }
+
+  function readGrid(){
+    const out={};
+    document.querySelectorAll('.clrCell').forEach(el=>{
+      const clr=el.dataset.clr, fat=el.dataset.fat;
+      if(!out[clr])out[clr]={};
+      out[clr][fat]=el.value.trim();
+    });
+    return out;
+  }
+
+  function loadFarmers(){
+    const sel=qs('clrChartFarmer');
+    if(!sel)return;
+    const fs=farmers();
+    sel.innerHTML='<option value="">-- No farmer / common chart --</option>'+fs.map(f=>
+      '<option value="'+String(f.code||f.id||'').replace(/"/g,'&quot;')+'">'+
+      farmerLabel(f).replace(/</g,'&lt;')+'</option>').join('');
+  }
+
+  function refreshSaved(){
+    const charts=getCharts();
+    const copy=qs('clrCopyChart');
+    if(copy) copy.innerHTML='<option value="">-- Select saved chart --</option>'+
+      charts.map((c,i)=>'<option value="'+i+'">'+(c.name||('Chart '+(i+1)))+'</option>').join('');
+    const tb=qs('clrSavedRows');
+    if(tb) tb.innerHTML=charts.length?charts.map((c,i)=>{
+      const count=Object.values(c.values||{}).reduce((n,r)=>n+Object.values(r||{}).filter(v=>v!=='').length,0);
+      return '<tr><td>'+String(c.name||'').replace(/</g,'&lt;')+'</td><td>'+
+        String(c.farmerCode||'Common').replace(/</g,'&lt;')+'</td><td>'+count+'/126</td>'+
+        '<td><button class="blue" onclick="clrLoadChart('+i+')">Edit</button> '+
+        '<button class="red" onclick="clrDeleteChart('+i+')">Delete</button></td></tr>';
+    }).join(''):'<tr><td colspan="4">No saved chart</td></tr>';
+  }
+
+  window.clrFillTemplate=function(){
+    buildGrid({});
+  };
+  window.clrClearGrid=function(){
+    buildGrid({});
+  };
+  window.clrSaveChart=function(){
+    const name=(qs('clrChartName')?.value||'').trim() || ('Cow Chart '+new Date().toLocaleDateString());
+    const farmerCode=qs('clrChartFarmer')?.value||'';
+    const values=readGrid();
+    const count=Object.values(values).reduce((n,r)=>n+Object.values(r).filter(v=>v!=='').length,0);
+    if(!count){ alert('पहले rate values भरें।'); return; }
+    const charts=getCharts();
+    const existing=charts.findIndex(c=>c.name===name);
+    const obj={name,farmerCode,values,updatedAt:new Date().toISOString()};
+    if(existing>=0) charts[existing]=obj; else charts.push(obj);
+    setCharts(charts);
+    refreshSaved();
+    alert(count+' rate cells saved. अब इस chart को farmer के लिए use कर सकते हैं।');
+  };
+  window.clrLoadChart=function(i){
+    const c=getCharts()[i]; if(!c)return;
+    qs('clrChartName').value=c.name||'';
+    qs('clrChartFarmer').value=c.farmerCode||'';
+    buildGrid(c.values||{});
+  };
+  window.clrDeleteChart=function(i){
+    const charts=getCharts();
+    if(i===undefined){
+      i=qs('clrCopyChart')?.value;
+      if(i===''||i==null){alert('पहले saved chart select करें।');return;}
+      i=Number(i);
+    }
+    if(!confirm('Selected chart delete करें?'))return;
+    charts.splice(i,1); setCharts(charts); refreshSaved(); buildGrid({});
+  };
+
+  window.getCowCLRRate=function(farmerCode,fat,clr){
+    const charts=getCharts();
+    const exact=charts.find(c=>String(c.farmerCode||'')===String(farmerCode||''));
+    const common=charts.find(c=>!c.farmerCode);
+    const chart=exact||common;
+    if(!chart)return null;
+    const f=Number(fat).toFixed(1), c=String(Math.round(Number(clr)));
+    const v=chart.values?.[c]?.[f];
+    return v===''||v==null?null:Number(v);
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    loadFarmers(); buildGrid({}); refreshSaved();
+    qs('clrCopyChart')?.addEventListener('change',function(){
+      if(this.value!=='') clrLoadChart(Number(this.value));
+    });
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  const FATS = Array.from({length:21}, (_,i)=>(3+i/10).toFixed(1));
+  const CLRS = [25,26,27,28,29,30];
+  let rotation = 0;
+
+  function el(id){ return document.getElementById(id); }
+  function status(t){ const x=el('clrOcrStatus'); if(x)x.textContent=t; }
+
+  function normalizeImage(file, rot){
+    return new Promise((resolve,reject)=>{
+      const im=new Image();
+      im.onload=()=>{
+        const c=el('clrOcrCanvas'), ctx=c.getContext('2d');
+        let w=im.naturalWidth, h=im.naturalHeight;
+        const swap=(rot%180)!==0;
+        c.width=swap?h:w; c.height=swap?w:h;
+        ctx.save();
+        ctx.translate(c.width/2,c.height/2);
+        ctx.rotate(rot*Math.PI/180);
+        ctx.drawImage(im,-w/2,-h/2,w,h);
+        ctx.restore();
+        resolve(c);
+      };
+      im.onerror=reject;
+      im.src=URL.createObjectURL(file);
+    });
+  }
+
+  function tokens(line){
+    // OCR often changes decimal points to commas/dashes; normalize.
+    line=line.replace(/[|]/g,' ').replace(/[,]/g,'.').replace(/[–—−]/g,'-');
+    const m=line.match(/\b\d{1,2}(?:\.\d{1,2})?\b/g)||[];
+    return m.map(Number);
+  }
+
+  function putRowsFromText(text){
+    const rows={};
+    const lines=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+
+    // Best case: each OCR line contains a CLR number followed by its 21 rates.
+    for(const line of lines){
+      const nums=tokens(line);
+      const clr=nums.find(n=>CLRS.includes(n));
+      if(clr!=null){
+        const idx=nums.indexOf(clr);
+        let vals=nums.slice(idx+1).filter(n=>n>=20 && n<100);
+        // discard accidental FAT/CLR/header numbers
+        vals=vals.filter(n=>!(n>=3 && n<=5 && Math.abs(n*10-Math.round(n*10))<1e-6));
+        if(vals.length>=21) rows[String(clr)]=vals.slice(0,21).map(n=>n.toFixed(2));
+      }
+    }
+
+    // Fallback: collect plausible rate values from all text, then locate
+    // six consecutive groups of 21 after CLR markers.
+    if(Object.keys(rows).length<6){
+      const all=[];
+      for(const line of lines) all.push(...tokens(line));
+      for(const clr of CLRS){
+        if(rows[String(clr)]) continue;
+        // Find the first occurrence of this CLR in the token stream and
+        // take the next 21 plausible rate values.
+        const p=all.indexOf(clr);
+        if(p<0) continue;
+        const vals=[];
+        for(let j=p+1;j<all.length && vals.length<21;j++){
+          const n=all[j];
+          if(n>=20 && n<100 && !(n>=25 && n<=30 && Number.isInteger(n))) vals.push(n);
+        }
+        if(vals.length===21) rows[String(clr)]=vals.map(n=>n.toFixed(2));
+      }
+    }
+    return rows;
+  }
+
+  async function ocrCanvas(canvas){
+    if(!window.Tesseract) throw new Error('OCR engine load नहीं हुआ');
+    const result=await Tesseract.recognize(canvas,'eng',{
+      logger:m=>{
+        if(m.status && typeof m.progress==='number')
+          status('OCR: '+m.status+' '+Math.round(m.progress*100)+'%');
+      }
+    });
+    return result.data.text||'';
+  }
+
+  window.clrRotatePhoto=function(){
+    rotation=(rotation+90)%360;
+    status('Photo rotation: '+rotation+'°');
+  };
+
+  window.clrReadPhoto=async function(){
+  const f=el('clrOcrPhoto')?.files?.[0];
+  if(!f){ alert('पहले rate chart photo चुनें।'); return; }
+  if(!/^image\//.test(f.type)){ alert('अभी JPG/PNG photo upload करें। PDF को पहले image में बदलें।'); return; }
+  if(!window.Tesseract){ alert('OCR engine load नहीं हुआ। Internet ON करके page reload करें।'); return; }
+
+  try{
+    status('Photo तैयार हो रही है...');
+    const img=await new Promise((resolve,reject)=>{
+      const im=new Image();
+      im.onload=()=>resolve(im);
+      im.onerror=reject;
+      im.src=URL.createObjectURL(f);
+    });
+
+    // Put the chart upright. Most phone photos of this chart are either
+    // landscape or rotated 90 degrees.
+    let rot=rotation||0;
+    if(img.height > img.width*1.18) rot=(rot+90)%360;
+
+    const src=document.createElement('canvas');
+    const sw=img.naturalWidth, sh=img.naturalHeight;
+    const swap=rot%180!==0;
+    src.width=swap?sh:sw; src.height=swap?sw:sh;
+    const sctx=src.getContext('2d');
+    sctx.save();
+    sctx.translate(src.width/2,src.height/2);
+    sctx.rotate(rot*Math.PI/180);
+    sctx.drawImage(img,-sw/2,-sh/2,sw,sh);
+    sctx.restore();
+
+    // This chart format has the rate table across almost the full image.
+    // Use fixed proportional geometry instead of unreliable grid detection.
+    const padX=Math.round(src.width*0.008);
+    const top=Math.round(src.height*0.215);
+    const bottom=Math.round(src.height*0.948);
+    const left=padX;
+    const right=src.width-padX;
+
+    const tableW=right-left;
+    const tableH=bottom-top;
+    const firstColW=tableW*(78/1515);
+    const dataLeft=left+firstColW;
+    const dataW=right-dataLeft;
+    const colW=dataW/21;
+    const rowH=tableH/7;
+
+    // Build a temporary white/black preprocessed cell canvas.
+    const cell=document.createElement('canvas');
+    const cctx=cell.getContext('2d',{willReadFrequently:true});
+    const worker=await Tesseract.createWorker('eng');
+    await worker.setParameters({
+      tessedit_pageseg_mode:'7',
+      tessedit_char_whitelist:'0123456789.',
+      preserve_interword_spaces:'1'
+    });
+
+    const values={};
+    let done=0;
+    for(let r=0;r<6;r++){
+      const clr=25+r;
+      values[clr]={};
+      for(let c=0;c<21;c++){
+        // Crop a little inside the cell to remove grid lines.
+        const x=Math.round(dataLeft+c*colW+colW*0.07);
+        const y=Math.round(top+(r+1)*rowH+rowH*0.16);
+        const w=Math.max(30,Math.round(colW*0.86));
+        const h=Math.max(20,Math.round(rowH*0.62));
+
+        cell.width=w*4; cell.height=h*4;
+        cctx.fillStyle='#fff'; cctx.fillRect(0,0,cell.width,cell.height);
+        cctx.imageSmoothingEnabled=true;
+        cctx.drawImage(src,x,y,w,h,0,0,cell.width,cell.height);
+
+        // High-contrast threshold.
+        const pix=cctx.getImageData(0,0,cell.width,cell.height);
+        for(let i=0;i<pix.data.length;i+=4){
+          const g=(pix.data[i]*0.299+pix.data[i+1]*0.587+pix.data[i+2]*0.114);
+          const v=g<175?0:255;
+          pix.data[i]=pix.data[i+1]=pix.data[i+2]=v;
+        }
+        cctx.putImageData(pix,0,0);
+
+        // First OCR pass.
+        let out=await worker.recognize(cell);
+        let raw=(out.data.text||'').replace(/,/g,'.').replace(/\s/g,'');
+        let mm=raw.match(/\d{1,2}\.\d{1,2}/);
+        let rate=mm?parseFloat(mm[0]):null;
+
+        // If a cell was missed, retry with a larger crop and a second
+        // segmentation mode. This is important for the narrow cells at
+        // the edges of photographed charts.
+        if(rate==null || rate<20 || rate>100){
+          const x2=Math.max(0,Math.round(dataLeft+c*colW+colW*0.015));
+          const y2=Math.max(0,Math.round(top+(r+1)*rowH+rowH*0.06));
+          const w2=Math.min(src.width-x2,Math.round(colW*0.97));
+          const h2=Math.min(src.height-y2,Math.round(rowH*0.88));
+          cell.width=Math.max(40,w2*5); cell.height=Math.max(30,h2*5);
+          cctx.fillStyle='#fff'; cctx.fillRect(0,0,cell.width,cell.height);
+          cctx.imageSmoothingEnabled=true;
+          cctx.drawImage(src,x2,y2,w2,h2,0,0,cell.width,cell.height);
+          const pix2=cctx.getImageData(0,0,cell.width,cell.height);
+          for(let i=0;i<pix2.data.length;i+=4){
+            const g=(pix2.data[i]*0.299+pix2.data[i+1]*0.587+pix2.data[i+2]*0.114);
+            const v=g<190?0:255;
+            pix2.data[i]=pix2.data[i+1]=pix2.data[i+2]=v;
+          }
+          cctx.putImageData(pix2,0,0);
+          await worker.setParameters({tessedit_pageseg_mode:'8'});
+          const retry=await worker.recognize(cell);
+          raw=(retry.data.text||'').replace(/,/g,'.').replace(/\s/g,'');
+          mm=raw.match(/\d{1,2}\.\d{1,2}/);
+          rate=mm?parseFloat(mm[0]):null;
+          await worker.setParameters({tessedit_pageseg_mode:'7'});
+        }
+
+        // Final safety check.
+        if(rate!=null && (rate<20 || rate>100)) rate=null;
+        values[clr][FATS[c]]=rate==null?'':rate.toFixed(2);
+
+        done++;
+        status('Rate chart पढ़ रहे हैं: '+done+'/126');
+      }
+    }
+    // One final targeted pass for any cells still blank.
+    const missing=[];
+    for(let r=0;r<6;r++){
+      for(let c=0;c<21;c++){
+        if(!values[25+r][FATS[c]]) missing.push({r,c});
+      }
+    }
+    if(missing.length){
+      await worker.setParameters({tessedit_pageseg_mode:'8'});
+      for(const m of missing){
+        const clr=25+m.r, c=m.c;
+        const x=Math.max(0,Math.round(dataLeft+m.c*colW+colW*0.01));
+        const y=Math.max(0,Math.round(top+(m.r+1)*rowH+rowH*0.04));
+        const w=Math.min(src.width-x,Math.round(colW*0.98));
+        const h=Math.min(src.height-y,Math.round(rowH*0.94));
+        cell.width=Math.max(40,w*5); cell.height=Math.max(30,h*5);
+        cctx.fillStyle='#fff'; cctx.fillRect(0,0,cell.width,cell.height);
+        cctx.drawImage(src,x,y,w,h,0,0,cell.width,cell.height);
+        const rr=await worker.recognize(cell);
+        const s=(rr.data.text||'').replace(/,/g,'.').replace(/\s/g,'');
+        const q=s.match(/\d{1,2}\.\d{1,2}/);
+        const n=q?parseFloat(q[0]):null;
+        if(n!=null && n>=20 && n<=100) values[clr][FATS[c]]=n.toFixed(2);
+      }
+    }
+    await worker.terminate();
+
+    let count=0;
+    Object.values(values).forEach(row=>Object.values(row).forEach(v=>{if(v!=='')count++;}));
+    if(count===0){
+      status('कोई rate नहीं मिला।');
+      alert('Chart की table position नहीं मिली। पूरी table की साफ, सीधी photo upload करें।');
+      return;
+    }
+
+    // Fill the editable 126-cell grid.
+    document.querySelectorAll('.clrCell').forEach(input=>{
+      const ci=FATS.indexOf(input.dataset.fat);
+      const v=values[input.dataset.clr]?.[input.dataset.fat];
+      if(ci>=0 && v!==undefined) input.value=v;
+    });
+
+    status(count+'/126 rate values photo से मिलीं। Values check/correct करके Save Chart करें।');
+    alert(count+'/126 rate values photo से मिलीं। अब values check/correct करके Save Chart करें।');
+  }catch(e){
+    console.error(e);
+    status('OCR error: '+(e.message||e));
+    alert('Photo read नहीं हो पाई। Internet ON रखकर साफ, सीधी और पूरी chart photo से फिर try करें।');
+  }
+};
+})();
+</script>
+
+
+<script>
+(function(){
+  document.addEventListener('click', function(e){
+    const input=e.target.closest && e.target.closest('#clrGrid input.clrCell');
+    if(input){
+      input.removeAttribute('readonly');
+      input.removeAttribute('disabled');
+      setTimeout(()=>{ try{input.focus(); input.select();}catch(_){} },0);
+    }
+  }, true);
+  document.addEventListener('input', function(e){
+    if(e.target && e.target.classList.contains('clrCell')) e.target.dataset.edited='1';
+  });
+})();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const f=document.getElementById('clrOcrPhoto');
+  const b=document.getElementById('clrReadPhotoBtn');
+  const m=document.getElementById('clrSelectedPhoto');
+  if(f){
+    f.addEventListener('change', function(){
+      if(f.files && f.files.length){
+        if(m){m.classList.remove('hide'); m.style.display='block';}
+        if(b){b.style.display='block'; b.disabled=false;}
+        const st=document.getElementById('clrOcrStatus');
+        if(st) st.textContent='Photo ready: '+f.files[0].name;
+      }
+    });
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  function q(id){return document.getElementById(id);}
+  function updateCowRateHint(){
+    const animal=q('ma')?.value, farmer=q('mf')?.value, fat=Number(q('fat')?.value||0), clr=Number(q('mclr')?.value||0);
+    const hint=q('cowRateLiveHint');
+    if(!hint)return;
+    if(animal!=='Cow'){hint.textContent='🐃 Buffalo rate: Farmer ke Buffalo Rate × FAT × Milk.';return;}
+    if(!farmer||!fat||!clr){hint.textContent='🐄 Cow: Farmer + FAT + CLR डालें, फिर assigned CLR chart से rate आएगा.';return;}
+    try{
+      const saved=JSON.parse(localStorage.getItem('SSD_V34_COW_CLR_CHARTS')||'[]')||[];
+      const c=saved.find(x=>String(x.farmerCode||'')===String(farmer))||saved.find(x=>!x.farmerCode);
+      const v=c?.values?.[String(Math.round(clr))]?.[fat.toFixed(1)];
+      hint.textContent=(v!=null&&v!=='') ? ('✅ Cow CLR Rate: ₹'+Number(v).toFixed(2)+' / L  (FAT '+fat.toFixed(1)+' + CLR '+Math.round(clr)+')')
+        : '⚠️ इस Farmer के लिए इस FAT + CLR का rate chart में नहीं मिला।';
+    }catch(e){hint.textContent='🐄 Cow CLR chart check करें.';}
+  }
+  ['ma','mf','fat','mclr','ml'].forEach(id=>q(id)?.addEventListener('input',updateCowRateHint));
+  q('ma')?.addEventListener('change',updateCowRateHint);
+  q('mf')?.addEventListener('change',updateCowRateHint);
+  document.addEventListener('DOMContentLoaded',updateCowRateHint);
+})();
+</script>
+
+
+<script>
+(function(){
+  const CFG_KEY='SSD_FIREBASE_CONFIG', META_KEY='SSD_CLOUD_SYNC_META';
+  let app=null,auth=null,db=null,uid=null,remoteUnsub=null,syncing=false,autoTimer=null;
+  function q(id){return document.getElementById(id);}
+  function setStatus(t){if(q('cloudStatus'))q('cloudStatus').textContent=t;}
+  function getCfg(){try{return JSON.parse(localStorage.getItem(CFG_KEY)||'null')}catch(e){return null}}
+  function isAppKey(k){return k && k!==CFG_KEY && k!==META_KEY && (/^SSD_|^ssd_/).test(k);}
+  function keys(){let a=[];for(let i=0;i<localStorage.length;i++){let k=localStorage.key(i);if(isAppKey(k))a.push(k)}return a;}
+  window.cloudInit=function(){
+    let cfg;try{cfg=JSON.parse(q('fbConfig').value||'');if(!cfg.projectId||!cfg.apiKey||!cfg.appId)throw Error('Config अधूरा है')}catch(e){alert('Firebase config सही JSON में डालें।\\n'+e.message);return}
+    try{localStorage.setItem(CFG_KEY,JSON.stringify(cfg));app=firebase.apps.length?firebase.app():firebase.initializeApp(cfg);auth=firebase.auth();db=firebase.firestore();auth.onAuthStateChanged(onUser);setStatus('Firebase connected. अब Google sign-in करें.')}catch(e){setStatus('Firebase error: '+e.message);alert(e.message)}
+  };
+  function onUser(u){uid=u?.uid||null;if(q('cloudUser'))q('cloudUser').textContent=u?('Signed in: '+(u.email||u.displayName||u.uid)):'Not signed in';if(remoteUnsub){remoteUnsub();remoteUnsub=null}if(u){setStatus('Connected + signed in');startRealtime()}}
+  window.cloudGoogleSignIn=async function(){if(!auth){cloudInit();if(!auth)return}try{await auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())}catch(e){alert(e.message)}};
+  window.cloudSignOut=async function(){try{await auth?.signOut()}catch(e){alert(e.message)}};
+  async function uploadKey(k){if(!db||!uid)return;await db.collection('dairySync').doc(uid).collection('kv').doc(encodeURIComponent(k)).set({key:k,value:localStorage.getItem(k),updatedAt:firebase.firestore.FieldValue.serverTimestamp()})}
+  window.cloudUpload=async function(){if(!db||!uid){alert('पहले Firebase connect और Google sign-in करें।');return}let a=keys();setStatus('Uploading '+a.length+' items...');for(const k of a)await uploadKey(k);setStatus('Device → Cloud complete: '+a.length+' items')};
+  window.cloudDownload=async function(){if(!db||!uid){alert('पहले Firebase connect और Google sign-in करें।');return}setStatus('Downloading cloud data...');let s=await db.collection('dairySync').doc(uid).collection('kv').get();syncing=true;s.forEach(d=>{let x=d.data();if(x.key&&x.value!=null)localStorage.setItem(x.key,x.value)});syncing=false;setStatus('Cloud → Device complete: '+s.size+' items');setTimeout(()=>location.reload(),500)};
+  window.cloudSyncNow=async function(){if(!navigator.onLine){alert('Internet बंद है। Data device में रहेगा; online होने पर Sync करें।');return}try{await cloudUpload();await cloudDownload()}catch(e){syncing=false;setStatus('Sync error: '+e.message);alert(e.message)}};
+  function startRealtime(){remoteUnsub=db.collection('dairySync').doc(uid).collection('kv').onSnapshot(s=>{if(syncing)return;let changed=false;s.docChanges().forEach(ch=>{if(ch.type==='added'||ch.type==='modified'){let x=ch.doc.data();if(x.key&&x.value!=null&&localStorage.getItem(x.key)!==x.value){syncing=true;localStorage.setItem(x.key,x.value);syncing=false;changed=true}}});if(changed){setStatus('☁️ Cloud change received');setTimeout(()=>location.reload(),700)}},e=>setStatus('Realtime sync error: '+e.message))}
+  const nativeSet=Storage.prototype.setItem;
+  Storage.prototype.setItem=function(k,v){nativeSet.call(this,k,v);if(this===localStorage&&!syncing&&uid&&db&&navigator.onLine&&q('cloudAuto')?.checked&&isAppKey(k)){clearTimeout(autoTimer);autoTimer=setTimeout(()=>uploadKey(k).catch(e=>setStatus('Auto sync error: '+e.message)),1200)}};
+  window.cloudClearConfig=function(){localStorage.removeItem(CFG_KEY);if(q('fbConfig'))q('fbConfig').value='';setStatus('Config cleared')};
+  document.addEventListener('DOMContentLoaded',function(){let c=getCfg();if(!c&&q('fbConfig')?.value){try{c=JSON.parse(q('fbConfig').value);localStorage.setItem(CFG_KEY,JSON.stringify(c))}catch(e){}}if(q('fbConfig')&&c)q('fbConfig').value=JSON.stringify(c,null,2);if(c&&window.firebase){try{app=firebase.apps.length?firebase.app():firebase.initializeApp(c);auth=firebase.auth();db=firebase.firestore();auth.onAuthStateChanged(onUser);setStatus('Firebase ready — अब Google sign-in करें')}catch(e){setStatus('Firebase setup needed')}}});
+})();
+</script>
+
+</body></html>
